@@ -6,6 +6,7 @@ package C195.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,6 +29,8 @@ public class LoginController implements Initializable {
 
     @FXML
     Label errorLabel;
+    
+    ResourceBundle rb = ResourceBundle.getBundle("../helper/Login", Locale.getDefault());
 
     /**
      *
@@ -42,7 +45,7 @@ public class LoginController implements Initializable {
         boolean valid = true;
 
         if (username.isEmpty() || password.isEmpty()) {
-            errorString = errorString + (valid ? "" : "\n") + "username and password must not be empty";
+            errorString = errorString + (valid ? "" : "\n") /*+ rb.getStringArray("err1")*/;
             valid = false;
         }
 
