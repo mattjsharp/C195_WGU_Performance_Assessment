@@ -12,7 +12,7 @@
    <children>
       <VBox alignment="TOP_CENTER">
          <children>
-            <Label alignment="CENTER" contentDisplay="CENTER" styleClass="greeting" text="Welocme!">
+            <Label fx:id="greetingLabel" alignment="CENTER" contentDisplay="CENTER" styleClass="greeting">
                <font>
                   <Font size="50.0" />
                </font>
@@ -24,7 +24,7 @@
                         <Font size="35.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="usernameField" prefHeight="48.0" prefWidth="217.0" promptText="USERNAME" styleClass="textField">
+                  <TextField fx:id="usernameField" prefHeight="48.0" prefWidth="217.0" styleClass="textField">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -32,7 +32,7 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <TextField fx:id="passwordField" prefHeight="48.0" prefWidth="217.0" promptText="PASSWORD" styleClass="textField">
+                  <TextField fx:id="passwordField" prefHeight="48.0" prefWidth="217.0" styleClass="textField">
                      <font>
                         <Font size="21.0" />
                      </font>
@@ -45,7 +45,7 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#submit" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 30; -fx-background-color: green; -fx-text-fill: white; -fx-font-weight: 900;" text="Log In">
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#submit" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 30; -fx-background-color: green; -fx-text-fill: white; -fx-font-weight: 900;">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

@@ -14,6 +14,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -28,9 +29,12 @@ public class LoginController implements Initializable {
     TextField usernameField, passwordField;
 
     @FXML
-    Label errorLabel;
+    Label greetingLabel, errorLabel;
     
-    ResourceBundle rb = ResourceBundle.getBundle("../helper/Login", Locale.getDefault());
+    @FXML
+    Button loginButton;
+    
+    ResourceBundle rb;
 
     /**
      *
@@ -45,7 +49,7 @@ public class LoginController implements Initializable {
         boolean valid = true;
 
         if (username.isEmpty() || password.isEmpty()) {
-            errorString = errorString + (valid ? "" : "\n") /*+ rb.getStringArray("err1")*/;
+            errorString = errorString + (valid ? "" : "\n") /*+ rb.getString("err1")*/;
             valid = false;
         }
 
@@ -62,6 +66,12 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        rb = ResourceBundle.getBundle("L10n/login", Locale.getDefault());
+        greetingLabel.setText(rb.getString("welcome"));
+        usernameField.setPromptText(rb.getString("username"));
+        passwordField.setPromptText(rb.getString("password"));
+        loginButton.setText(rb.getString("login"));
+        
         errorLabel.setManaged(false);
     }
 
