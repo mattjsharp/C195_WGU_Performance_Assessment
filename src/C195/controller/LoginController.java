@@ -6,6 +6,7 @@ package C195.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.ZoneId;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -29,7 +30,7 @@ public class LoginController implements Initializable {
     TextField usernameField, passwordField;
 
     @FXML
-    Label greetingLabel, errorLabel;
+    Label greetingLabel, zoneLabel, errorLabel;
     
     @FXML
     Button loginButton;
@@ -66,11 +67,12 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        rb = ResourceBundle.getBundle("L10n/login", Locale.getDefault());
+        rb = ResourceBundle.getBundle("C195/L10n/login", Locale.getDefault());
         greetingLabel.setText(rb.getString("welcome"));
         usernameField.setPromptText(rb.getString("username"));
         passwordField.setPromptText(rb.getString("password"));
         loginButton.setText(rb.getString("login"));
+        zoneLabel.setText(String.valueOf(ZoneId.systemDefault()));
         
         errorLabel.setManaged(false);
     }
