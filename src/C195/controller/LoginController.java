@@ -4,10 +4,11 @@
  */
 package C195.controller;
 
+import C195.dao.LoginQuery;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.ZoneId;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +25,7 @@ import javafx.stage.Stage;
  *
  * @author LabUser
  */
-public class LoginController implements Initializable {
+public class LoginController extends Controller implements Initializable, LoginQuery {
 
     @FXML
     TextField usernameField, passwordField;
@@ -34,23 +35,26 @@ public class LoginController implements Initializable {
     
     @FXML
     Button loginButton;
-    
-    ResourceBundle rb;
 
     /**
      *
      * @param e
      * @throws IOException
+     * @throws java.sql.SQLException
      */
-    public void submit(ActionEvent e) throws IOException {
-        String username = usernameField.getText(),
-                password = passwordField.getText(),
+    public void submit(ActionEvent e) throws IOException, SQLException {
+        
+        String username = usernameField.getText().trim(),
+                password = passwordField.getText().trim(),
                 errorString = "";
 
         boolean valid = true;
 
         if (username.isEmpty() || password.isEmpty()) {
-            errorString = errorString + (valid ? "" : "\n") /*+ rb.getString("err1")*/;
+            errorString = errorString + (valid ? "" : "\n") + l10n.getString("err1");
+            valid = false;
+        } else if (!login(username, password)) {
+            errorString = errorString + (valid ? "" : "\n") + l10n.getString("err2");
             valid = false;
         }
 
@@ -58,8 +62,9 @@ public class LoginController implements Initializable {
         errorLabel.setText(errorString);
 
         if (valid) {
+            
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/Calendar.fxml")));
+            Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/Main.fxml")));
             stage.setScene(scene);
             stage.show();
         }
@@ -67,11 +72,11 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        rb = ResourceBundle.getBundle("C195/L10n/login", Locale.getDefault());
-        greetingLabel.setText(rb.getString("welcome"));
-        usernameField.setPromptText(rb.getString("username"));
-        passwordField.setPromptText(rb.getString("password"));
-        loginButton.setText(rb.getString("login"));
+        
+        greetingLabel.setText(l10n.getString("welcome"));
+        usernameField.setPromptText(l10n.getString("username"));
+        passwordField.setPromptText(l10n.getString("password"));
+        loginButton.setText(l10n.getString("login"));
         zoneLabel.setText(String.valueOf(ZoneId.systemDefault()));
         
         errorLabel.setManaged(false);

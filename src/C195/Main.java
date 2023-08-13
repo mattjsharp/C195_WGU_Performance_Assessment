@@ -1,5 +1,7 @@
 package C195;
 
+import C195.dao.JDBC;
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,8 +18,10 @@ import javafx.stage.Stage;
  * @author LabUser
  */
 public class Main extends Application {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        JDBC.openConnection();
         launch(args);
+        JDBC.closeConnection();
     }
 
     @Override
