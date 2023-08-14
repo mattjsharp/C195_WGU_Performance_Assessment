@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,7 +24,7 @@ import javafx.stage.Stage;
  *
  * @author LabUser
  */
-public class LoginController extends Controller implements Initializable, LoginQuery {
+public class LoginController extends Controller implements LoginQuery {
 
     @FXML
     TextField usernameField, passwordField;
