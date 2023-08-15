@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+
+<TableView fx:id="appointmentTable" prefHeight="397.0" prefWidth="729.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.AppointmentTableController">
+   <columns>
+      <TableColumn fx:id="appointmentIdColumn" prefWidth="75.0" />
+      <TableColumn fx:id="appointmentTitleColumn" prefWidth="75.0" />
+      <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="75.0" />
+      <TableColumn fx:id="appointmentLocationColumn" prefWidth="75.0" />
+      <TableColumn fx:id="customerIdColumn" prefWidth="75.0" />
+      <TableColumn fx:id="userIdColumn" prefWidth="75.0" />
+      <TableColumn fx:id="contactIdColumn" prefWidth="75.0" />
+   </columns>
+</TableView>
