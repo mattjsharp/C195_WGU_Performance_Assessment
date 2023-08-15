@@ -7,14 +7,10 @@
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.MainController">
    <children>
       <TableView fx:id="appointmentTable" prefHeight="200.0" prefWidth="200.0">
-        <columns>
-            <TableColumn prefWidth="75.0" text="Title" />
-          <TableColumn prefWidth="100.0" text="Description" />
-          <TableColumn prefWidth="78.0" text="Location" />
-            <TableColumn prefWidth="83.0" text="Type" />
-            <TableColumn prefWidth="69.0" text="Start" />
-            <TableColumn prefWidth="84.0" text="End" />
-        </columns>
-      </TableView>
+         <columns>
+            <TableColumn fx:id="appointmentTitleColumn" prefWidth="75.0" />
+            <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="75.0" text="Column X" />
+            <TableColumn fx:id="appointmentLocationColumn" prefWidth="75.0" text="Column X" />
+         </columns></TableView>
    </children>
 </StackPane>
