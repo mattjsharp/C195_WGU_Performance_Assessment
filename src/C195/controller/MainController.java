@@ -27,7 +27,7 @@ public class MainController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            appointmentsTab.setContent(FXMLLoader.load(getClass().getResource("../view/AppointmentTable.fxml")));
+            appointmentsTab.setContent(FXMLLoader.load(getClass().getResource("../view/AppointmentTab.fxml")));
         } catch (IOException e) {
             e.getMessage();
         }

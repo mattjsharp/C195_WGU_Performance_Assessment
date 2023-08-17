@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  */
 public class Appointment {
 
-    private int id;
+    private final int id;
     private String title;
     private String description;
     private String location;

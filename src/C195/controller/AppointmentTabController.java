@@ -18,7 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  *
  * @author LabUser
  */
-public class AppointmentTableController extends Controller implements AppointmentQuery {
+public class AppointmentTabController extends Controller implements AppointmentQuery {
 
     @FXML
     TableView<Appointment> appointmentTable;
