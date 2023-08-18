@@ -7,22 +7,29 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <BorderPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.MainController">
    <center>
       <VBox>
          <children>
-            <HBox prefHeight="74.0" prefWidth="808.0" />
-            <TabPane prefHeight="523.0" prefWidth="808.0" tabClosingPolicy="UNAVAILABLE">
+            <HBox fx:id="optionsBox" alignment="CENTER" prefHeight="74.0" />
+            <TabPane fx:id="tabPane" prefHeight="523.0" prefWidth="808.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
                 <Tab fx:id="appointmentsTab">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="557.0" />
                   </content>
                 </Tab>
+                  <Tab fx:id="customersTab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
               </tabs>
             </TabPane>
          </children>
       </VBox>
    </center>
+   <left>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+   </left>
 </BorderPane>

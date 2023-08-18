@@ -5,6 +5,7 @@
 package C195.model;
 
 import java.time.LocalDateTime;
+import static C195.helper.DateFormatter.formatDate;
 
 /**
  *
@@ -97,20 +98,20 @@ public class Appointment {
         this.startDate = startDate;
     }
 
-    public LocalDateTime getStartDate() {
-        return startDate;
+    public String getStartDate() {
+        return formatDate(startDate);
     }
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
 
-    public LocalDateTime getEndDate() {
-        return endDate;
+    public String getEndDate() {
+        return formatDate(endDate);
     }
 
-    public LocalDateTime getCreationDate() {
-        return creationDate;
+    public String getCreationDate() {
+        return formatDate(creationDate);
     }
 
     public String getCreatedBy() {
