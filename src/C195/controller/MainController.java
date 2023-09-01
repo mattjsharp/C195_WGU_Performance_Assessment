@@ -9,11 +9,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.Pane;
-
 /**
  * FXML Controller class
  *
@@ -26,9 +23,6 @@ public class MainController extends Controller {
 
     @FXML
     Tab appointmentsTab, customersTab;
-
-    @FXML
-    Pane optionBox;
 
     Controller optionBoxController;
     Controller appointmentTabController;
@@ -62,30 +56,5 @@ public class MainController extends Controller {
         appointmentTabController = appointmentTabLoader.getController();
         customerTabController = customerTabLoader.load();
         
-        getTab(tabPane.getSelectionModel().getSelectedItem());
-
-        tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
-            if (newTab != null) {
-                try {
-                    getTab(newTab);
-                } catch (IOException e) {
-                    e.getMessage();
-                }
-            }
-        });
-
-    }
-
-    private void getTab(Tab tab) throws IOException {
-
-        if (tab.getId().equals(appointmentsTab.getId())) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentOptionsBox.fxml"));
-            Parent root = loader.load();
-            optionBoxController = loader.getController();
-            optionBox.getChildren().add(root);
-        } else {
-            optionBox.getChildren().clear();
-            optionBoxController = null;
-        }
     }
 }
