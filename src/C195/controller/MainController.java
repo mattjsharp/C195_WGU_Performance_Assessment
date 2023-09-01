@@ -9,9 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -27,7 +28,11 @@ public class MainController extends Controller {
     Tab appointmentsTab, customersTab;
 
     @FXML
-    HBox optionsBox;
+    Pane optionBox;
+
+    Controller optionBoxController;
+    Controller appointmentTabController;
+    Controller customerTabController;
 
     /**
      * Initializes the controller class.
@@ -38,36 +43,49 @@ public class MainController extends Controller {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            appointmentsTab.setContent(FXMLLoader.load(getClass().getResource("../view/AppointmentTab.fxml")));
+            initMain();
         } catch (IOException e) {
             e.getMessage();
         }
 
-        try {
-            customersTab.setContent(FXMLLoader.load(getClass().getResource("../view/CustomerTab.fxml")));
-        } catch (IOException e) {
-            e.getMessage();
-        }
-
-        getTab(tabPane.getSelectionModel().getSelectedItem());
-            
         appointmentsTab.setText(l10n.getString("appointments"));
         customersTab.setText(l10n.getString("customers"));
+    }
+
+    private void initMain() throws IOException {
+        FXMLLoader appointmentTabLoader = new FXMLLoader(getClass().getResource("../view/AppointmentTab.fxml"));
+        FXMLLoader customerTabLoader = new FXMLLoader(getClass().getResource("../view/CustomerTab.fxml"));
+        
+        appointmentsTab.setContent(appointmentTabLoader.load());
+        customersTab.setContent(customerTabLoader.load());
+        
+        appointmentTabController = appointmentTabLoader.getController();
+        customerTabController = customerTabLoader.load();
+        
+        getTab(tabPane.getSelectionModel().getSelectedItem());
 
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
             if (newTab != null) {
-                getTab(newTab);
+                try {
+                    getTab(newTab);
+                } catch (IOException e) {
+                    e.getMessage();
+                }
             }
         });
+
     }
 
-    private void getTab(Tab tab) {
-        try {
-            if (tab.getId().equals(appointmentsTab.getId())) {
-                optionsBox = FXMLLoader.load(getClass().getResource("../view/AppointmentOptionsBox.fxml"));
-            }
-        } catch (IOException e) {
-            e.getMessage();
+    private void getTab(Tab tab) throws IOException {
+
+        if (tab.getId().equals(appointmentsTab.getId())) {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentOptionsBox.fxml"));
+            Parent root = loader.load();
+            optionBoxController = loader.getController();
+            optionBox.getChildren().add(root);
+        } else {
+            optionBox.getChildren().clear();
+            optionBoxController = null;
         }
     }
 }

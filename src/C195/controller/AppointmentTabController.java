@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class AppointmentTabController extends Controller implements AppointmentQuery {
 
     @FXML
-    TableView<Appointment> appointmentTable;
+    public TableView<Appointment> appointmentTable;
 
     @FXML
     TableColumn<Appointment, Integer> appointmentIdColumn;
