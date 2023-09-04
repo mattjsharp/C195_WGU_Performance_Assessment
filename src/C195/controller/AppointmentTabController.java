@@ -118,6 +118,9 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         dialog.setTitle("Add appointment");
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
+        Controller dialogController = loader.getController();
+        dialogController.dialog = dialog;
+        
         try {
             dialog.getDialogPane().setContent(loader.load());
         } catch (Exception e) {

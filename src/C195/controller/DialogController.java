@@ -14,7 +14,6 @@ import javafx.scene.control.ButtonType;
  */
 public abstract class DialogController extends Controller {
     
-    
     @FXML
     public Button cancelButton, submitButton;
     

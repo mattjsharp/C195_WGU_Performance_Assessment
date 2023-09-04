@@ -28,7 +28,8 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/Login.fxml"));
         stage.setScene(new Scene(root));
-        stage.setTitle("Goose Neck Appoitment Schedulder");
+        stage.setTitle("Appoitment Schedulder");
+        stage.setResizable(false);
         stage.show();
     }
 }

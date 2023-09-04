@@ -5,6 +5,7 @@
 package C195.controller;
 
 import C195.dao.LoginQuery;
+import C195.helper.LoginActivityLogger;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -38,6 +39,8 @@ public class LoginController extends Controller implements LoginQuery {
     
     @FXML
     Button loginButton;
+    
+    LoginActivityLogger logger = LoginActivityLogger.getInstance();
 
     /**
      *
@@ -56,16 +59,18 @@ public class LoginController extends Controller implements LoginQuery {
         if (username.isEmpty() || password.isEmpty()) {
             errorString = errorString + (valid ? "" : "\n") + l10n.getString("err1");
             valid = false;
+            logger.newLog("FAIL: empty username and/or passord field(s)");
         } else if (!login(username, password)) {
             errorString = errorString + (valid ? "" : "\n") + l10n.getString("err2");
             valid = false;
+            logger.newLog("FAIL: credentials not found for \"" + username + "\"");
         }
 
         errorLabel.setManaged(!valid);
         errorLabel.setText(errorString);
 
         if (valid) {
-            
+            logger.newLog("SUCCESS: \"" + username + "\" logged in successfully");
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/Main.fxml")));
             stage.setScene(scene);

@@ -13,6 +13,6 @@ import javafx.scene.control.Dialog;
  * @author LabUser
  */
 public abstract class Controller implements L10n, Initializable {
-    Dialog dialog;
+    public Dialog dialog;
     
 }
