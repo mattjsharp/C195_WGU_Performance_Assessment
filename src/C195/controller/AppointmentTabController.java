@@ -7,6 +7,7 @@ package C195.controller;
 import C195.model.Appointment;
 import C195.dao.AppointmentQuery;
 import C195.helper.DateFormatter;
+import C195.helper.SimpleAlert;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -132,11 +133,24 @@ public class AppointmentTabController extends Controller implements AppointmentQ
     }
 
     public void modifyAppointment(ActionEvent event) {
-        System.out.println("Modify");
+        Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+        
+        if (selectedAppointment == null) {
+            SimpleAlert.simpleAlert("No appointment Selected", "No appointment Selected");
+        } else {
+            System.out.println("modify");
+        }
+        
     }
 
     public void deleteAppointment(ActionEvent event) {
-        System.out.println("Delete");
+        Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
+        
+        if (selectedAppointment == null) {
+            SimpleAlert.simpleAlert("No appointment Selected", "No appointment Selected");
+        } else {
+            System.out.println("delete");
+        }
     }
 
 }
