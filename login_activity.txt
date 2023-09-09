@@ -1,0 +1,25 @@
+[2023-09-04T09:19:51.886071600] - FAIL: credentials not found for "teepee"
+[2023-09-04T09:20:00.394781600] - SUCCESS: "admin" logged in successfully
+[2023-09-05T06:32:28.141352600] - SUCCESS: "test" logged in successfully
+[2023-09-05T06:34:00.540620500] - SUCCESS: "test" logged in successfully
+[2023-09-05T09:05:17.049120800] - SUCCESS: "test" logged in successfully
+[2023-09-05T09:09:45.520416900] - FAIL: credentials not found for "testt"
+[2023-09-05T09:09:48.026352500] - SUCCESS: "test" logged in successfully
+[2023-09-09T18:25:00.031602800] - SUCCESS: "test" logged in successfully
+[2023-09-09T18:29:10.516853600] - SUCCESS: "test" logged in successfully
+[2023-09-09T18:48:54.145817800] - SUCCESS: "test" logged in successfully
+[2023-09-09T19:01:57.358152500] - SUCCESS: "test" logged in successfully
+[2023-09-09T19:03:02.782266800] - SUCCESS: "test" logged in successfully
+[2023-09-09T19:10:39.689113500] - SUCCESS: "test" logged in successfully
+[2023-09-09T19:18:54.248143100] - SUCCESS: "test" logged in successfully
+[2023-09-09T19:21:29.204514200] - SUCCESS: "admin" logged in successfully
+[2023-09-09T19:49:59.900382600] - SUCCESS: "test" logged in successfully
+[2023-09-09T19:52:04.800726900] - SUCCESS: "test" logged in successfully
+[2023-09-09T19:55:10.084286700] - SUCCESS: "test" logged in successfully
+[2023-09-09T20:12:58.261743100] - SUCCESS: "test" logged in successfully
+[2023-09-09T20:13:54.467945100] - SUCCESS: "test" logged in successfully
+[2023-09-09T20:17:10.844556100] - FAIL: credentials not found for "test"
+[2023-09-09T20:17:12.116206100] - SUCCESS: "test" logged in successfully
+[2023-09-09T20:30:20.376767600] - SUCCESS: "test" logged in successfully
+[2023-09-09T20:36:04.382671900] - SUCCESS: "test" logged in successfully
+[2023-09-09T21:01:50.356582300] - SUCCESS: "test" logged in successfully

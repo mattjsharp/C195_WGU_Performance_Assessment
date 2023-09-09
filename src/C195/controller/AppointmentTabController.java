@@ -6,12 +6,15 @@ package C195.controller;
 
 import C195.model.Appointment;
 import C195.dao.AppointmentQuery;
+import C195.dao.DeleteAppointment;
 import C195.helper.DateFormatter;
 import C195.helper.SimpleAlert;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,12 +27,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import C195.dao.InsertAppointment;
 
 /**
  *
  * @author LabUser
  */
-public class AppointmentTabController extends Controller implements AppointmentQuery {
+public class AppointmentTabController extends Controller implements AppointmentQuery, InsertAppointment, DeleteAppointment {
 
     @FXML
     public TableView<Appointment> appointmentTable;
@@ -96,11 +100,8 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         appointmentCustomerIdColumn.setText(l10n.getString("customerId"));
         appointmentUserIdColumn.setText(l10n.getString("userId"));
 
-        // Adding each appoinment from the results of the appointment query the a list.
-        List<Appointment> appointments = getAppointments();
-        
-        // Populating the table with all of the appointments in the appointment list.
-        appointmentTable.getItems().addAll(appointments);
+        // Updating the table.
+        updateTable();
 
         // Adding and event listener to the group of radio buttons.
         appointmentSort.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
@@ -110,46 +111,56 @@ public class AppointmentTabController extends Controller implements AppointmentQ
                 System.out.println("Selected: " + selectedValue);
             }
         });
+    }
 
+    private void updateTable() {
+        List<Appointment> appointments = getAppointments();
+        appointmentTable.getItems().clear();
+        appointmentTable.getItems().addAll(appointments);
     }
 
     public void addAppointment(ActionEvent event) throws IOException {
-        System.out.println("Add");
-        dialog = new Dialog();
-        dialog.setTitle("Add appointment");
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
-        Controller dialogController = loader.getController();
-        dialogController.dialog = dialog;
-        
-        try {
-            dialog.getDialogPane().setContent(loader.load());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        dialog.showAndWait();
-        dialog.close();
+        insertAppointment();
+        updateTable();
+
+//        dialog = new Dialog();
+//        dialog.setTitle("Add appointment");
+//        
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
+//        Controller dialogController = loader.getController();
+//        dialogController.dialog = dialog;
+//        
+//        try {
+//            dialog.getDialogPane().setContent(loader.load());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        
+//        dialog.showAndWait();
+//        dialog.close();
     }
 
     public void modifyAppointment(ActionEvent event) {
         Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
-        
+
         if (selectedAppointment == null) {
-            SimpleAlert.simpleAlert("No appointment Selected", "No appointment Selected");
+            SimpleAlert.simpleWarning("No appointment Selected", "No appointment Selected");
         } else {
             System.out.println("modify");
         }
-        
+
     }
 
     public void deleteAppointment(ActionEvent event) {
         Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
-        
+
         if (selectedAppointment == null) {
-            SimpleAlert.simpleAlert("No appointment Selected", "No appointment Selected");
+            SimpleAlert.simpleWarning("No appointment Selected", "No appointment Selected");
         } else {
-            System.out.println("delete");
+            if (SimpleAlert.simpleConfirm("Confirmation", "Are you sure you want to delete this appointment?")) {
+                deleteAppointment(selectedAppointment.getId());
+                updateTable();
+            }
         }
     }
 

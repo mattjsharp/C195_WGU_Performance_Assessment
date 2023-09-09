@@ -44,7 +44,7 @@ public interface AppointmentQuery {
                 );
             }
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
 
         return appointments;
