@@ -39,7 +39,7 @@ public interface CustomerQuery {
                 );
             }
         } catch (Exception e) {
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
        
        return customers;

@@ -33,7 +33,6 @@ public final class LoginActivityLogger {
     
     public void newLog(String message) {
         String formattedMessage = "[" + LocalDateTime.now() + "] - " + message;
-        System.out.println(formattedMessage);
         writer.println(formattedMessage);
     }
 }

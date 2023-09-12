@@ -28,6 +28,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import C195.dao.InsertAppointment;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -120,24 +125,24 @@ public class AppointmentTabController extends Controller implements AppointmentQ
     }
 
     public void addAppointment(ActionEvent event) throws IOException {
-        insertAppointment();
-        updateTable();
+        //insertAppointment();
 
-//        dialog = new Dialog();
-//        dialog.setTitle("Add appointment");
-//        
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
-//        Controller dialogController = loader.getController();
-//        dialogController.dialog = dialog;
-//        
-//        try {
-//            dialog.getDialogPane().setContent(loader.load());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        
-//        dialog.showAndWait();
-//        dialog.close();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
+        Parent root = loader.load();
+
+        Stage dialogStage = new Stage();
+        dialogStage.initStyle(StageStyle.UTILITY);
+        dialogStage.initModality(Modality.APPLICATION_MODAL);
+        dialogStage.setTitle("Add Appointment");
+
+        Controller controller = loader.getController();
+        controller.setStage(dialogStage);
+
+        Scene scene = new Scene(root);
+        dialogStage.setScene(scene);
+        dialogStage.showAndWait();
+
+        updateTable();
     }
 
     public void modifyAppointment(ActionEvent event) {
