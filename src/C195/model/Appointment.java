@@ -122,8 +122,8 @@ public class Appointment {
         this.lastUpdate = lastUpdate;
     }
 
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
+    public String getLastUpdate() {
+        return formatDate(lastUpdate);
     }
     
     public void setLastUpdatedBy(String lastUpdatedBy) {

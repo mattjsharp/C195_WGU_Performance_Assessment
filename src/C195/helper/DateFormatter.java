@@ -13,7 +13,7 @@ import java.time.format.DateTimeFormatter;
  */
 public interface DateFormatter {
     static String formatDate(LocalDateTime date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return date.format(formatter);
     }
 }

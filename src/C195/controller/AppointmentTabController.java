@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package C195.controller;
 
 import C195.model.Appointment;
@@ -14,7 +10,6 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observer;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +33,7 @@ import javafx.stage.StageStyle;
  *
  * @author LabUser
  */
-public class AppointmentTabController extends Controller implements AppointmentQuery, InsertAppointment, DeleteAppointment {
+public class AppointmentTabController extends Controller implements AppointmentQuery, DeleteAppointment {
 
     @FXML
     public TableView<Appointment> appointmentTable;
@@ -125,7 +120,6 @@ public class AppointmentTabController extends Controller implements AppointmentQ
     }
 
     public void addAppointment(ActionEvent event) throws IOException {
-        //insertAppointment();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
         Parent root = loader.load();
