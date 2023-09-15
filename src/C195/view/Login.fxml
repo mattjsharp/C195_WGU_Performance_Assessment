@@ -40,7 +40,7 @@
                   <Insets top="15.0" />
                </VBox.margin>
             </Label>
-            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#submit" prefHeight="40.0" prefWidth="149.0" style="-fx-background-radius: 30; -fx-background-color: green; -fx-text-fill: white; -fx-font-weight: 900;">
+            <Button fx:id="loginButton" mnemonicParsing="false" onAction="#submit" prefHeight="40.0" prefWidth="149.0">
                <VBox.margin>
                   <Insets top="15.0" />
                </VBox.margin>

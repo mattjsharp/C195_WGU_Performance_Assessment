@@ -30,23 +30,12 @@ public interface InsertAppointment {
             ps.setInt(12, userId);
             ps.setInt(13, contactId);
             
+            System.out.println(ps);
+            
             ps.executeUpdate();
+            
             return true;
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-    }
-
-    default boolean insertAppointment() {
-        String sql = "INSERT INTO appointments (Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES ('weenies', 'time for weenies', 'weenie street', 'blankets type', '2012-08-12 09:30:00', '2012-08-12 12:00:00', '2023-09-09 12:45:00', 'joe biden', '2023-09-09 12:45:00', 'hunter biden', 2, 1, 1);";
-
-        try {
-            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
-            ps.executeUpdate();
-            return true;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
             return false;
         }
     }

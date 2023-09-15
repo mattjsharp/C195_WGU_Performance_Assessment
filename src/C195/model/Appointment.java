@@ -97,20 +97,32 @@ public class Appointment {
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
     }
+    
+    public LocalDateTime getStartDate() {
+        return startDate;
+    }
 
-    public String getStartDate() {
+    public String getFormattedStartDate() {
         return formatDate(startDate);
     }
 
     public void setEndDate(LocalDateTime endDate) {
         this.endDate = endDate;
     }
-
-    public String getEndDate() {
-        return formatDate(endDate);
+    
+    public LocalDateTime getEndDate() {
+        return endDate;
     }
 
-    public String getCreationDate() {
+    public String getFormattedEndDate() {
+        return formatDate(endDate);
+    }
+    
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public String getFormattedCreationDate() {
         return formatDate(creationDate);
     }
 
@@ -121,8 +133,12 @@ public class Appointment {
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+    
+    public LocalDateTime getLastUpdate() {
+        return lastUpdate;
+    }
 
-    public String getLastUpdate() {
+    public String getFormattedLastUpdate() {
         return formatDate(lastUpdate);
     }
     
@@ -130,7 +146,7 @@ public class Appointment {
         this.lastUpdatedBy = lastUpdatedBy;
     }
 
-    public String getLastUpdatedBy() {
+    public String getFormattedLastUpdatedBy() {
         return lastUpdatedBy;
     }
 

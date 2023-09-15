@@ -3,26 +3,20 @@ package C195.controller;
 import C195.model.Appointment;
 import C195.dao.AppointmentQuery;
 import C195.dao.DeleteAppointment;
-import C195.helper.DateFormatter;
 import C195.helper.SimpleAlert;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import C195.dao.InsertAppointment;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Modality;
@@ -84,8 +78,8 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         appointmentContactIdColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         appointmentCustomerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        appointmentEndColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
+        appointmentEndColumn.setCellValueFactory(new PropertyValueFactory<>("formattedEndDate"));
         appointmentUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         // Setting the text for each of the column headers.
@@ -139,13 +133,29 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         updateTable();
     }
 
-    public void modifyAppointment(ActionEvent event) {
+    public void modifyAppointment(ActionEvent event) throws IOException {
         Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment == null) {
             SimpleAlert.simpleWarning("No appointment Selected", "No appointment Selected");
         } else {
-            System.out.println("modify");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
+            Parent root = loader.load();
+
+            Stage dialogStage = new Stage();
+            dialogStage.initStyle(StageStyle.UTILITY);
+            dialogStage.initModality(Modality.APPLICATION_MODAL);
+            dialogStage.setTitle("Modify Appointment");
+
+            AppointmentDialogController controller = loader.getController();
+            controller.setStage(dialogStage);
+            controller.setAppointment(selectedAppointment);
+            
+            Scene scene = new Scene(root);
+            dialogStage.setScene(scene);
+            dialogStage.showAndWait();
+
+            updateTable();
         }
 
     }

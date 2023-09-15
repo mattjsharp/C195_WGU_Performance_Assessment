@@ -45,7 +45,7 @@
                <children>
                   <HBox alignment="CENTER" GridPane.columnSpan="2">
                      <children>
-                        <Label text="Appointments" />
+                        <Label fx:id="appointmentFlagLabel" text="Add Appointment" />
                      </children>
                   </HBox>
                   <TextField fx:id="titleField" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
@@ -62,7 +62,7 @@
                   <Label text="Type" GridPane.rowIndex="4" />
                   <Label text="Start Date/Time" GridPane.rowIndex="5" />
                   <Label text="End Date/Time" GridPane.rowIndex="6" />
-                  <Label text="Created by" GridPane.rowIndex="7" />
+                  <Label fx:id="editedByLabel" text="Created by" GridPane.rowIndex="7" />
                   <Label text="Customer ID" GridPane.rowIndex="8" />
                   <Label text="User ID" GridPane.rowIndex="9" />
                   <Label text="Contact ID" GridPane.rowIndex="10" />
@@ -89,7 +89,7 @@
                               <ToggleGroup fx:id="startAmpm" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="PM" toggleGroup="$startAmpm" />
+                        <RadioButton fx:id="startPmRadioButton" mnemonicParsing="false" text="PM" toggleGroup="$startAmpm" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="6">
@@ -113,7 +113,7 @@
                               <ToggleGroup fx:id="endAmpm" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton mnemonicParsing="false" text="PM" toggleGroup="$endAmpm" />
+                        <RadioButton fx:id="endPmRadioButton" mnemonicParsing="false" text="PM" toggleGroup="$endAmpm" />
                      </children>
                   </HBox>
                </children>
