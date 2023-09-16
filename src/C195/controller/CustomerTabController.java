@@ -1,5 +1,6 @@
 package C195.controller;
 
+import C195.dao.CustomerInAppointmentQuery;
 import C195.dao.CustomerQuery;
 import C195.helper.SimpleAlert;
 import C195.model.Customer;
@@ -16,7 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
  *
  * @author LabUser
  */
-public class CustomerTabController extends Controller implements CustomerQuery {
+public class CustomerTabController extends Controller implements CustomerQuery, CustomerInAppointmentQuery {
 
     @FXML
     TableView customerTable;
@@ -42,13 +43,18 @@ public class CustomerTabController extends Controller implements CustomerQuery {
     }
     
     public void deleteCustomer() {
-        System.out.println("delete");
-        
         Customer selectedCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
         
         if (selectedCustomer == null) {
             SimpleAlert.simpleWarning("No customer Selected", "No customer selected.");
+        } else {
+            int obligations = customerInAppointment(selectedCustomer);
+            if (obligations > 0) {
+                SimpleAlert.simpleWarning("Scheduling Error", "Customer cannot be deleted\n\nCustomer still has : " + obligations + " appointment(s) scheduled.");
+            }
         }
+        
+        System.out.println("delete");
     }
     
     /**
