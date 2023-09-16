@@ -1,10 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package C195.controller;
 
 import C195.dao.CustomerQuery;
+import C195.helper.SimpleAlert;
 import C195.model.Customer;
 import java.net.URL;
 import java.util.List;
@@ -29,6 +26,30 @@ public class CustomerTabController extends Controller implements CustomerQuery {
     
     @FXML
     TableColumn customerNameColumn;
+    
+    public void addCustomer() {
+        System.out.println("add");
+    }
+    
+    public void modifyCustomer() {
+        System.out.println("modify");
+        
+        Customer selectedCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
+        
+        if (selectedCustomer == null) {
+            SimpleAlert.simpleWarning("No customer Selected", "No customer selected.");
+        }
+    }
+    
+    public void deleteCustomer() {
+        System.out.println("delete");
+        
+        Customer selectedCustomer = (Customer) customerTable.getSelectionModel().getSelectedItem();
+        
+        if (selectedCustomer == null) {
+            SimpleAlert.simpleWarning("No customer Selected", "No customer selected.");
+        }
+    }
     
     /**
      * Initializes the controller class.

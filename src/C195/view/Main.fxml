@@ -11,23 +11,20 @@
       <VBox>
          <children>
             <TabPane fx:id="tabPane" prefHeight="523.0" prefWidth="808.0" tabClosingPolicy="UNAVAILABLE">
-              <tabs>
-                <Tab fx:id="appointmentsTab">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="171.0" prefWidth="557.0" />
-                  </content>
-                </Tab>
+               <tabs>
+                  <Tab fx:id="appointmentsTab">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
                   <Tab fx:id="customersTab">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
                   </Tab>
-              </tabs>
+               </tabs>
             </TabPane>
          </children>
       </VBox>
    </center>
-   <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </left>
 </BorderPane>
