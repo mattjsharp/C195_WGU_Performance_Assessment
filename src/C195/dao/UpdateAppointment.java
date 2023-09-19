@@ -25,8 +25,6 @@ public interface UpdateAppointment {
             ps.setInt(11, contactId);
             ps.setInt(12, id);
             
-            System.out.println(ps);
-            
             ps.executeUpdate();
             
             return true;

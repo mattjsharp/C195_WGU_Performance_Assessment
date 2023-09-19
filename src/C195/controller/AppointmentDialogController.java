@@ -14,6 +14,9 @@ import C195.model.User;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,10 +65,10 @@ public class AppointmentDialogController extends Controller implements DateForma
     private Appointment appointment;
 
     /**
-     *
-     * @param event
+     * Submits the appointment.
+     * Performs tedious logical and validation checks to ensure appointments meet the correct criteria. 
      */
-    public void submitDialog(ActionEvent event) {
+    public void submitDialog() {
         String title = titleField.getText(),
                 description = descriptionField.getText(),
                 location = locationField.getText(),
@@ -76,7 +79,7 @@ public class AppointmentDialogController extends Controller implements DateForma
         // setting these fields to an inital value that is not possible
         int customerId = -1, userId = -1, contactId = -1,
                 startHour = (int) startHourSpinner.getValue(), startMinute = (int) startMinuteSpinner.getValue(),
-                endHour = (int) startHourSpinner.getValue(), endMinute = (int) endMinuteSpinner.getValue();
+                endHour = (int) endHourSpinner.getValue(), endMinute = (int) endMinuteSpinner.getValue();
 
         String errorString = "";
         boolean valid = true;
@@ -155,20 +158,57 @@ public class AppointmentDialogController extends Controller implements DateForma
                 endHour = 0;
             }
         }
+        
+        // Adjusting time zone to UTC and others to EST
+        LocalDateTime start = 
+                LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)
+                        .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+        
+        LocalDateTime end = 
+                LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endHour, endMinute)
+                        .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+        
+        LocalDateTime startEST = start.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
+        LocalDateTime endEST = end.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
+        
+        LocalTime startTimeEST = start.toLocalTime();
+        LocalTime endTimeEST = end.toLocalTime();
+        
+        // Date Range Validation
+        if (start.isAfter(end)) {
+            errorString += "Start date cannot be greter than the end date.\n\n";
+            valid = false;
+        }
+        
+        if ((startTimeEST.isBefore(LocalTime.of(8, 0)) || startTimeEST.isAfter(LocalTime.of(17, 0))) ||
+                (endTimeEST.isBefore(LocalTime.of(8, 0)) || endTimeEST.isAfter(LocalTime.of(17, 0)))) {
+            errorString += "Date cannot be schedlued outside of office hours:\n\t\t8:00am - 5:00pm EST\n\n";
+            valid = false;
+            System.out.println(startTimeEST);
+            System.out.println(endTimeEST);
+        }
+        
+        // Checking if either day is scheduled on a weekend.
+        if ((startEST.getDayOfWeek() == startEST.getDayOfWeek().SATURDAY || startEST.getDayOfWeek() == startEST.getDayOfWeek().SUNDAY) ||
+                (endEST.getDayOfWeek() == endEST.getDayOfWeek().SATURDAY || endEST.getDayOfWeek() == endEST.getDayOfWeek().SUNDAY)) {
+            errorString += "Appointment cannot be scheduled on weekends EST.\n\n";
+            valid = false;
+        }
+        
+        
+        
+        
 
         // Final result
         if (valid) {
-            /////////////////////////////////
-            System.out.println("Start Hour: " + startHour + "\nEnd Hour: " + endHour);
-            ////////////////////////////////
             if (modified) {
                 if (updateAppointment(title,
                         description,
                         location,
                         type,
-                        DateFormatter.formatDate(LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)),
-                        DateFormatter.formatDate(LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endHour, endMinute)),
-                        DateFormatter.formatDate(LocalDateTime.now()),
+                        DateFormatter.formatDate(start),
+                        DateFormatter.formatDate(end),
+                        DateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
                         editedBy,
                         customerId,
                         userId,
@@ -176,27 +216,29 @@ public class AppointmentDialogController extends Controller implements DateForma
                         appointment.getId()
                 )) {
                     stage.close();
+                    SimpleAlert.simpleInformation("Success", "Appointment successfully modified.");
                 } else {
-                    SimpleAlert.simpleWarning("SQL Error", "Somthing went wrong with the database.");
+                    SimpleAlert.simpleError("SQL Error", "Somthing went wrong with the database.");
                 }
             } else {
                 if (insertAppointment(title,
                         description,
                         location,
                         type,
-                        DateFormatter.formatDate(LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)),
-                        DateFormatter.formatDate(LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endHour, endMinute)),
-                        DateFormatter.formatDate(LocalDateTime.now()),
+                        DateFormatter.formatDate(start),
+                        DateFormatter.formatDate(end),
+                        DateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
                         editedBy,
-                        DateFormatter.formatDate(LocalDateTime.now()),
+                        DateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
                         editedBy,
                         customerId,
                         userId,
                         contactId
                 )) {
                     stage.close();
+                    SimpleAlert.simpleInformation("Success", "Appointment added successfully.");
                 } else {
-                    SimpleAlert.simpleWarning("SQL Error", "Somthing went wrong with the database.");
+                    SimpleAlert.simpleError("SQL Error", "Somthing went wrong with the database.");
                 }
             }
         } else {
@@ -254,7 +296,10 @@ public class AppointmentDialogController extends Controller implements DateForma
 
     }
 
-    public void cancelDialog(ActionEvent event) {
+    /**
+     * Closes the dialog window. 
+     */
+    public void cancelDialog() {
         stage.close();
     }
 
@@ -277,6 +322,9 @@ public class AppointmentDialogController extends Controller implements DateForma
         for (Customer customer : getCustomers()) {
             customerComboBox.getItems().add(customer.getId());
         }
+        
+        startDatePicker.setValue(LocalDate.now());
+        endDatePicker.setValue(LocalDate.now());
 
         startHourSpinner.setValueFactory(new IntegerSpinnerValueFactory(1, 12));
         startMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59));

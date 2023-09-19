@@ -6,10 +6,9 @@ import java.sql.PreparedStatement;
  *
  * @author LabUser
  */
-public interface DeleteAppointment {
-    default boolean deleteAppointment(int appointmentId) {
-        
-        String sql = "DELETE FROM appointments WHERE Appointment_ID = " + appointmentId + ";";
+public interface DeleteCustomer {
+    default boolean  deleteCustomer(int customerId) {
+        String sql = "DELETE FROM customers WHERE Customer_ID = " + customerId + ";";
         
         try {
             PreparedStatement ps = JDBC.connection.prepareStatement(sql);

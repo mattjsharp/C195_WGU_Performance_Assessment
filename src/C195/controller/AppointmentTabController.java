@@ -6,9 +6,10 @@ import C195.dao.DeleteAppointment;
 import C195.helper.SimpleAlert;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -51,10 +52,10 @@ public class AppointmentTabController extends Controller implements AppointmentQ
     TableColumn<Appointment, String> appointmentTypeColumn;
 
     @FXML
-    TableColumn<Appointment, String> appointmentStartColumn;
+    TableColumn<LocalDateTime, String> appointmentStartColumn;
 
     @FXML
-    TableColumn<Appointment, String> appointmentEndColumn;
+    TableColumn<LocalDateTime, String> appointmentEndColumn;
 
     @FXML
     TableColumn<Appointment, Integer> appointmentCustomerIdColumn;
@@ -68,6 +69,12 @@ public class AppointmentTabController extends Controller implements AppointmentQ
     @FXML
     ToggleGroup appointmentSort;
 
+    /**
+     *  Initializes the controller class.
+     * 
+     * @param url
+     * @param rb
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Providing a propertyValueFactory for each column to control what is displayed
@@ -78,8 +85,8 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         appointmentContactIdColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         appointmentCustomerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
-        appointmentEndColumn.setCellValueFactory(new PropertyValueFactory<>("formattedEndDate"));
+        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        appointmentEndColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
         appointmentUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         // Setting the text for each of the column headers.
@@ -97,6 +104,9 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         // Updating the table.
         updateTable();
 
+        // Checkin for near appointments
+        checkAppointments();
+
         // Adding and event listener to the group of radio buttons.
         appointmentSort.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
             if (newVal != null) {
@@ -107,13 +117,24 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         });
     }
 
+    /**
+     * Updates the appointment table.
+     * Queries the appointment table from the client_schedule database and stores each record a list.
+     * Clears the current table replaces the records with the new List.
+     */
     private void updateTable() {
         List<Appointment> appointments = getAppointments();
         appointmentTable.getItems().clear();
         appointmentTable.getItems().addAll(appointments);
     }
 
-    public void addAppointment(ActionEvent event) throws IOException {
+    /**
+     * Adds a new appointment.
+     * Opens a dialog with several fields to allow users to add new appointments.
+     * 
+     * @throws IOException Throws an IOException if there is an issue with the FXML document.
+     */
+    public void addAppointment() throws IOException {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AppointmentDialog.fxml"));
         Parent root = loader.load();
@@ -132,8 +153,15 @@ public class AppointmentTabController extends Controller implements AppointmentQ
 
         updateTable();
     }
-
-    public void modifyAppointment(ActionEvent event) throws IOException {
+    
+    /**
+     * Modifies a selected appointment.
+     * Opens a modified appointment dialog with the appointment details loaded in each of the fields.
+     * Notifies the user if the no appointment is selected.
+     * 
+     * @throws IOException Throws an IOException if there is an issue with the FXML document.
+     */
+    public void modifyAppointment() throws IOException {
         Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment == null) {
@@ -150,7 +178,7 @@ public class AppointmentTabController extends Controller implements AppointmentQ
             AppointmentDialogController controller = loader.getController();
             controller.setStage(dialogStage);
             controller.setAppointment(selectedAppointment);
-            
+
             Scene scene = new Scene(root);
             dialogStage.setScene(scene);
             dialogStage.showAndWait();
@@ -160,17 +188,49 @@ public class AppointmentTabController extends Controller implements AppointmentQ
 
     }
 
-    public void deleteAppointment(ActionEvent event) {
+    /**
+     * Deletes a selected appointment.
+     * Asks for confirmation window after a user presses the delete button to delete the appointment selected on the appointment table.
+     * Displays a warning if there is no appointment selected and notifies the user if the delete was successful or not.
+     */
+    public void deleteAppointment() {
         Appointment selectedAppointment = appointmentTable.getSelectionModel().getSelectedItem();
 
         if (selectedAppointment == null) {
             SimpleAlert.simpleWarning("No appointment Selected", "No appointment Selected");
         } else {
             if (SimpleAlert.simpleConfirm("Confirmation", "Are you sure you want to delete this appointment?")) {
-                deleteAppointment(selectedAppointment.getId());
-                updateTable();
+                if (deleteAppointment(selectedAppointment.getId())) {
+                    updateTable();
+                    SimpleAlert.simpleInformation("Delete Success", "ID: " + selectedAppointment.getId() + " TYPE: " + selectedAppointment.getType() + " deleted successfully.");
+                } else {
+                    SimpleAlert.simpleError("SQL Error", "Somthing went wrong with the database.");
+                }
             }
         }
     }
 
+    /**
+     * Checks if there are any appointments within 15 minutes.
+     * Queries the appointment table and checks each appointment if it meets the time criteria.
+     * Displays a message displaying either upcoming appointments or that none are near.
+     */
+    private void checkAppointments() {
+        int appointmentCount = 0;
+        String appointmentDescription = "";
+        List<Appointment> appointments = getAppointments();
+        for (Appointment appointment : appointments) {
+            int minutesDifference = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), appointment.getStartDate());
+            if (minutesDifference <= 15 && minutesDifference > 0) {
+                appointmentDescription += "ID: " + appointment.getId() + "\tSTART: " + appointment.getFormattedStartDate() + "\tTITLE: " + appointment.getTitle() + "\n\n";
+                appointmentCount++;
+            }
+        }
+
+        if (appointmentCount > 0) {
+            SimpleAlert.simpleWarning("" + appointmentCount + " Near Appointments", "There are " + appointmentCount + " appointments within the near future:\n\n" + appointmentDescription);
+        } else {
+            SimpleAlert.simpleInformation("No Appointments", "There are no appointments scheduded in the near future.");
+        }
+    }
 }

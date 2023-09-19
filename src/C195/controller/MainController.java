@@ -2,6 +2,7 @@ package C195.controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,6 +52,5 @@ public class MainController extends Controller {
         
         appointmentTabController = appointmentTabLoader.getController();
         customerTabController = customerTabLoader.load();
-        
     }
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package C195.dao;
 
 import java.sql.PreparedStatement;
@@ -29,8 +25,6 @@ public interface InsertAppointment {
             ps.setInt(11, customerId);
             ps.setInt(12, userId);
             ps.setInt(13, contactId);
-            
-            System.out.println(ps);
             
             ps.executeUpdate();
             

@@ -3,6 +3,8 @@ package C195.dao;
 import C195.model.Appointment;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public interface AppointmentQuery {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+                
                 appointments.add(new Appointment(
                         rs.getInt("Appointment_ID"),
                         rs.getString("Title"),
@@ -36,7 +39,7 @@ public interface AppointmentQuery {
                         rs.getInt("Customer_ID"),
                         rs.getInt("User_ID"),
                         rs.getInt("Contact_ID")
-                    )
+                )
                 );
             }
         } catch (Exception e) {
