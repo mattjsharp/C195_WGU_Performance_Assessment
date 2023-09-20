@@ -1,14 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package C195.model;
 
 import java.time.LocalDateTime;
 import static C195.helper.DateFormatter.formatDate;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
- *
+ * Appointment Model Class.
+ * Model class representing appointments stored on the client_schedule database.
+ * Many of the getters here are only for access by the property value factories to be displayed in tables without formatting.
  * @author LabUser
  */
 public class Appointment {
@@ -93,6 +93,10 @@ public class Appointment {
     public String getType() {
         return type;
     }
+    
+    public LocalDate getDate() {
+        return startDate.toLocalDate();
+    }
 
     public void setStartDate(LocalDateTime startDate) {
         this.startDate = startDate;
@@ -100,6 +104,10 @@ public class Appointment {
     
     public LocalDateTime getStartDate() {
         return startDate;
+    }
+    
+    public LocalTime getStartTime() {
+        return startDate.toLocalTime();
     }
 
     public String getFormattedStartDate() {
@@ -112,6 +120,10 @@ public class Appointment {
     
     public LocalDateTime getEndDate() {
         return endDate;
+    }
+    
+    public LocalTime getEndTime() {
+        return endDate.toLocalTime();
     }
 
     public String getFormattedEndDate() {
@@ -174,3 +186,20 @@ public class Appointment {
         return contactId;
     }
 }
+
+/*
+Appointment_ID INT(10) (PK)
+Title VARCHAR(50)
+Description VARCHAR(50)
+Location VARCHAR(50)
+Type VARCHAR(50)
+Start DATETIME
+End DATETIME
+Create_Date DATETIME
+Created_By VARCHAR(50)
+Last_Update TIMESTAMP
+Last_Updated_By VARCHAR(50)
+Customer_ID INT(10) (FK)
+User_ID INT(10) (FK)
+Contact_ID INT(10) (FK)
+*/

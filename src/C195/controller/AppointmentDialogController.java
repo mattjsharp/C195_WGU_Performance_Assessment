@@ -16,9 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -47,7 +45,7 @@ public class AppointmentDialogController extends Controller implements DateForma
             editedByField;
 
     @FXML
-    DatePicker startDatePicker, endDatePicker;
+    DatePicker datePicker;
 
     @FXML
     ComboBox<Integer> customerComboBox, userComboBox, contactComboBox;
@@ -75,7 +73,7 @@ public class AppointmentDialogController extends Controller implements DateForma
                 type = typeField.getText(),
                 editedBy = editedByField.getText();
 
-        LocalDate startDate = startDatePicker.getValue(), endDate = endDatePicker.getValue();
+        LocalDate startDate = datePicker.getValue();
         // setting these fields to an inital value that is not possible
         int customerId = -1, userId = -1, contactId = -1,
                 startHour = (int) startHourSpinner.getValue(), startMinute = (int) startMinuteSpinner.getValue(),
@@ -107,12 +105,7 @@ public class AppointmentDialogController extends Controller implements DateForma
         }
 
         if (startDate == null) {
-            errorString += "Start date is required\n\n";
-            valid = false;
-        }
-
-        if (endDate == null) {
-            errorString += "End date is required\n\n";
+            errorString += "Date is required\n\n";
             valid = false;
         }
 
@@ -165,27 +158,22 @@ public class AppointmentDialogController extends Controller implements DateForma
                         .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
         
         LocalDateTime end = 
-                LocalDateTime.of(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth(), endHour, endMinute)
+                LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), endHour, endMinute)
                         .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
         
         LocalDateTime startEST = start.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
         LocalDateTime endEST = end.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
         
-        LocalTime startTimeEST = start.toLocalTime();
-        LocalTime endTimeEST = end.toLocalTime();
-        
         // Date Range Validation
         if (start.isAfter(end)) {
-            errorString += "Start date cannot be greter than the end date.\n\n";
+            errorString += "Start time cannot be greter than the end time.\n\n";
             valid = false;
         }
         
-        if ((startTimeEST.isBefore(LocalTime.of(8, 0)) || startTimeEST.isAfter(LocalTime.of(17, 0))) ||
-                (endTimeEST.isBefore(LocalTime.of(8, 0)) || endTimeEST.isAfter(LocalTime.of(17, 0)))) {
+        if ((startEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || startEST.toLocalTime().isAfter(LocalTime.of(17, 0))) ||
+                (endEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || endEST.toLocalTime().isAfter(LocalTime.of(17, 0)))) {
             errorString += "Date cannot be schedlued outside of office hours:\n\t\t8:00am - 5:00pm EST\n\n";
             valid = false;
-            System.out.println(startTimeEST);
-            System.out.println(endTimeEST);
         }
         
         // Checking if either day is scheduled on a weekend.
@@ -246,6 +234,10 @@ public class AppointmentDialogController extends Controller implements DateForma
         }
     }
 
+    /**
+     * Populates the form with data from the selected appointment.
+     * @param appointment The selected appointment from the appointment table.
+     */
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
 
@@ -282,10 +274,9 @@ public class AppointmentDialogController extends Controller implements DateForma
         descriptionField.setText(appointment.getDescription());
         locationField.setText(appointment.getLocation());
         typeField.setText(appointment.getType());
-        startDatePicker.setValue(appointment.getStartDate().toLocalDate());
+        datePicker.setValue(appointment.getStartDate().toLocalDate());
         startHourSpinner.setValueFactory(new IntegerSpinnerValueFactory(1, 12, startHour));
         startMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59, startMinute));
-        endDatePicker.setValue(appointment.getEndDate().toLocalDate());
         endHourSpinner.setValueFactory(new IntegerSpinnerValueFactory(1, 12, endHour));
         endMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59, endMinute));
         editedByField.setText(appointment.getFormattedLastUpdatedBy());
@@ -323,8 +314,7 @@ public class AppointmentDialogController extends Controller implements DateForma
             customerComboBox.getItems().add(customer.getId());
         }
         
-        startDatePicker.setValue(LocalDate.now());
-        endDatePicker.setValue(LocalDate.now());
+        datePicker.setValue(LocalDate.now());
 
         startHourSpinner.setValueFactory(new IntegerSpinnerValueFactory(1, 12));
         startMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59));

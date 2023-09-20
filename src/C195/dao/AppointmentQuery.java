@@ -24,17 +24,23 @@ public interface AppointmentQuery {
 
             while (rs.next()) {
                 
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
+                
+
                 appointments.add(new Appointment(
                         rs.getInt("Appointment_ID"),
                         rs.getString("Title"),
                         rs.getString("Description"),
                         rs.getString("Location"),
                         rs.getString("Type"),
-                        rs.getTimestamp("Start").toLocalDateTime(),
-                        rs.getTimestamp("End").toLocalDateTime(),
-                        rs.getTimestamp("Create_Date").toLocalDateTime(),
+                        start,
+                        end,
+                        createDate,
                         rs.getString("Created_By"),
-                        rs.getTimestamp("Last_Update").toLocalDateTime(),
+                        lastUpdate,
                         rs.getString("Last_Updated_By"),
                         rs.getInt("Customer_ID"),
                         rs.getInt("User_ID"),

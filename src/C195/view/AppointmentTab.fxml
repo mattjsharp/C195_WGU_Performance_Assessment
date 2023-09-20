@@ -57,16 +57,16 @@
       </HBox>
       <TableView fx:id="appointmentTable" prefHeight="397.0" prefWidth="900.0">
          <columns>
-            <TableColumn fx:id="appointmentIdColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentTitleColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentLocationColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentContactIdColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentTypeColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentStartColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentEndColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentCustomerIdColumn" prefWidth="75.0" />
-            <TableColumn fx:id="appointmentUserIdColumn" prefWidth="75.0" />
+            <TableColumn fx:id="appointmentIdColumn" prefWidth="106.0" />
+            <TableColumn fx:id="appointmentTitleColumn" prefWidth="86.0" />
+            <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="85.0" />
+            <TableColumn fx:id="appointmentLocationColumn" prefWidth="62.0" />
+            <TableColumn fx:id="appointmentContactIdColumn" prefWidth="69.0" />
+            <TableColumn fx:id="appointmentTypeColumn" prefWidth="82.0" />
+            <TableColumn fx:id="appointmentStartColumn" prefWidth="84.0" />
+            <TableColumn fx:id="appointmentEndColumn" prefWidth="68.0" />
+            <TableColumn fx:id="appointmentCustomerIdColumn" prefWidth="68.0" />
+            <TableColumn fx:id="appointmentUserIdColumn" prefWidth="90.0" />
          </columns>
       </TableView>
    </children>

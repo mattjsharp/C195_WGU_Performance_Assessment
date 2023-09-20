@@ -115,6 +115,9 @@ public class AppointmentTabController extends Controller implements AppointmentQ
                 System.out.println("Selected: " + selectedValue);
             }
         });
+        
+        // Setting a place holder in case there are no appointments schedueled
+        appointmentTable.setPlaceholder(new javafx.scene.control.Label("There are no Appointments Scheduled"));
     }
 
     /**
