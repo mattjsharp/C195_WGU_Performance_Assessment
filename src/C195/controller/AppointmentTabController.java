@@ -52,10 +52,13 @@ public class AppointmentTabController extends Controller implements AppointmentQ
     TableColumn<Appointment, String> appointmentTypeColumn;
 
     @FXML
-    TableColumn<LocalDateTime, String> appointmentStartColumn;
+    TableColumn<Appointment, String> appointmentDateColumn;
+    
+    @FXML
+    TableColumn<Appointment, String> appointmentStartColumn;
 
     @FXML
-    TableColumn<LocalDateTime, String> appointmentEndColumn;
+    TableColumn<Appointment, String> appointmentEndColumn;
 
     @FXML
     TableColumn<Appointment, Integer> appointmentCustomerIdColumn;
@@ -85,8 +88,9 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         appointmentContactIdColumn.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         appointmentCustomerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
-        appointmentEndColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        appointmentDateColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
+        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        appointmentEndColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         appointmentUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         // Setting the text for each of the column headers.
@@ -96,6 +100,7 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         appointmentLocationColumn.setText(l10n.getString("location"));
         appointmentContactIdColumn.setText(l10n.getString("contactId"));
         appointmentTypeColumn.setText(l10n.getString("type"));
+        appointmentDateColumn.setText(l10n.getString("date"));
         appointmentStartColumn.setText(l10n.getString("start"));
         appointmentEndColumn.setText(l10n.getString("end"));
         appointmentCustomerIdColumn.setText(l10n.getString("customerId"));

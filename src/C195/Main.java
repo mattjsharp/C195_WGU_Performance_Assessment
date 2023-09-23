@@ -8,13 +8,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 /**
- *
+ * Main class.
+ * Contains the main method which is the entry point of the program.
+ * Launches the javaFX GUI application as well as opens and closes the database connection.
  * @author LabUser
  */
 public class Main extends Application {
@@ -24,6 +21,12 @@ public class Main extends Application {
         JDBC.closeConnection();
     }
 
+    /**
+     * Initializes the JavaFX GUI.
+     * Generates a scene graph from an FXML file to populate a scene which is loaded to the stage.
+     * @param stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("view/Login.fxml"));

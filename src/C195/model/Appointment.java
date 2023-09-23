@@ -1,9 +1,10 @@
 package C195.model;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import static C195.helper.DateFormatter.formatDate;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import static C195.helper.TableDateTimeFormatter.*;
 
 /**
  * Appointment Model Class.
@@ -28,6 +29,24 @@ public class Appointment {
     private int userId;
     private int contactId;
 
+    /**
+     * Constructor for the Appointment class.
+     * 
+     * @param id
+     * @param title
+     * @param description
+     * @param location
+     * @param type
+     * @param startDate
+     * @param endDate
+     * @param creationDate
+     * @param createdBy
+     * @param lastUpdate
+     * @param lastUpdatedBy
+     * @param customerId
+     * @param userId
+     * @param contactId 
+     */
     public Appointment(int id,
             String title,
             String description,
@@ -58,36 +77,24 @@ public class Appointment {
         this.contactId = contactId;
     }
 
+    /**
+     *
+     * @return Appointment ID.
+     */
     public int getId() {
         return id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
     public String getLocation() {
         return location;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getType() {
@@ -97,37 +104,29 @@ public class Appointment {
     public LocalDate getDate() {
         return startDate.toLocalDate();
     }
-
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
     
     public LocalDateTime getStartDate() {
         return startDate;
     }
     
-    public LocalTime getStartTime() {
-        return startDate.toLocalTime();
+    public String getStartTime() {
+        return tableTimeFormater(startDate);
     }
 
     public String getFormattedStartDate() {
-        return formatDate(startDate);
-    }
-
-    public void setEndDate(LocalDateTime endDate) {
-        this.endDate = endDate;
+        return tableDateFormatter(startDate);
     }
     
     public LocalDateTime getEndDate() {
         return endDate;
     }
     
-    public LocalTime getEndTime() {
-        return endDate.toLocalTime();
+    public String getEndTime() {
+        return tableTimeFormater(endDate);
     }
 
     public String getFormattedEndDate() {
-        return formatDate(endDate);
+        return tableDateFormatter(endDate);
     }
     
     public LocalDateTime getCreationDate() {
@@ -135,15 +134,11 @@ public class Appointment {
     }
 
     public String getFormattedCreationDate() {
-        return formatDate(creationDate);
+        return tableDateFormatter(creationDate);
     }
 
     public String getCreatedBy() {
         return createdBy;
-    }
-    
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
     }
     
     public LocalDateTime getLastUpdate() {
@@ -151,35 +146,19 @@ public class Appointment {
     }
 
     public String getFormattedLastUpdate() {
-        return formatDate(lastUpdate);
-    }
-    
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
+        return tableDateFormatter(lastUpdate);
     }
 
-    public String getFormattedLastUpdatedBy() {
+    public String getLastUpdatedBy() {
         return lastUpdatedBy;
-    }
-
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
     }
 
     public int getCustomerId() {
         return customerId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public int getUserId() {
         return userId;
-    }
-    
-    public void setContactId(int contactId) {
-        this.contactId = contactId;
     }
     
     public int getContactId() {

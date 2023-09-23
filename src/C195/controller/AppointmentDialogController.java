@@ -5,8 +5,8 @@ import C195.dao.CustomerQuery;
 import C195.dao.InsertAppointment;
 import C195.dao.UpdateAppointment;
 import C195.dao.UserQuery;
+import C195.helper.SQLDateFormatter;
 import C195.helper.SimpleAlert;
-import C195.helper.DateFormatter;
 import C195.model.Appointment;
 import C195.model.Contact;
 import C195.model.Customer;
@@ -32,7 +32,7 @@ import javafx.scene.control.TextField;
  *
  * @author LabUser
  */
-public class AppointmentDialogController extends Controller implements DateFormatter, ContactQuery, UserQuery, CustomerQuery, InsertAppointment, UpdateAppointment {
+public class AppointmentDialogController extends Controller implements ContactQuery, UserQuery, CustomerQuery, InsertAppointment, UpdateAppointment {
 
     @FXML
     Button submitButton, cancelButton;
@@ -194,9 +194,9 @@ public class AppointmentDialogController extends Controller implements DateForma
                         description,
                         location,
                         type,
-                        DateFormatter.formatDate(start),
-                        DateFormatter.formatDate(end),
-                        DateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(start),
+                        SQLDateFormatter.formatDate(end),
+                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
                         editedBy,
                         customerId,
                         userId,
@@ -213,11 +213,11 @@ public class AppointmentDialogController extends Controller implements DateForma
                         description,
                         location,
                         type,
-                        DateFormatter.formatDate(start),
-                        DateFormatter.formatDate(end),
-                        DateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(start),
+                        SQLDateFormatter.formatDate(end),
+                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
                         editedBy,
-                        DateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
                         editedBy,
                         customerId,
                         userId,
@@ -279,7 +279,7 @@ public class AppointmentDialogController extends Controller implements DateForma
         startMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59, startMinute));
         endHourSpinner.setValueFactory(new IntegerSpinnerValueFactory(1, 12, endHour));
         endMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59, endMinute));
-        editedByField.setText(appointment.getFormattedLastUpdatedBy());
+        editedByField.setText(appointment.getLastUpdatedBy());
 
         userComboBox.setValue(appointment.getUserId());
         customerComboBox.setValue(appointment.getCustomerId());

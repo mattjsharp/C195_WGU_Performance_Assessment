@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  *
  * @author LabUser
  */
-public interface DateFormatter {
-    static String formatDate(LocalDateTime date) {
+public class SQLDateFormatter {
+    public static String formatDate(LocalDateTime date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         return date.format(formatter);
     }

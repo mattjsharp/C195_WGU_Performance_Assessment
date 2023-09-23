@@ -63,6 +63,7 @@
             <TableColumn fx:id="appointmentLocationColumn" prefWidth="62.0" />
             <TableColumn fx:id="appointmentContactIdColumn" prefWidth="69.0" />
             <TableColumn fx:id="appointmentTypeColumn" prefWidth="82.0" />
+            <TableColumn fx:id="appointmentDateColumn" prefWidth="75.0" />
             <TableColumn fx:id="appointmentStartColumn" prefWidth="84.0" />
             <TableColumn fx:id="appointmentEndColumn" prefWidth="68.0" />
             <TableColumn fx:id="appointmentCustomerIdColumn" prefWidth="68.0" />
