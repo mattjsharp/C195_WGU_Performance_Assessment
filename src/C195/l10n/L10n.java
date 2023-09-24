@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package C195.l10n;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- *
+ * Contains a resource bundle to provide localization utilities.
  * @author LabUser
  */
 public interface L10n {

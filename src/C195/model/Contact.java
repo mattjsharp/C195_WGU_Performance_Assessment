@@ -35,3 +35,9 @@ public class Contact {
         this.emailAddress = emailAddress;
     }
 }
+
+/*
+Contact_ID INT(10) (PK)
+Contact_Name VARCHAR(50)
+Email VARCHAR(50)
+*/

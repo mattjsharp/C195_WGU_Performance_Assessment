@@ -84,6 +84,15 @@ public class User {
     
     public void setLastUpdatedBy(String lastUpdatedBy) {
         this.lastUpdatedBy = lastUpdatedBy;
-    }
-    
+    }  
 }
+
+/*
+User_ID INT(10) (PK)
+User_Name VARCHAR(50) (UNIQUE)
+Password TEXT
+Create_Date DATETIME
+Created_By VARCHAR(50)
+Last_Update TIMESTAMP
+Last_Updated_By VARCHAR(50)
+*/

@@ -116,8 +116,14 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         appointmentSort.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
             if (newVal != null) {
                 RadioButton selectedRadioButton = (RadioButton) newVal;
-                String selectedValue = selectedRadioButton.getText();
-                System.out.println("Selected: " + selectedValue);
+                String selectedValue = selectedRadioButton.getText().trim();
+                
+                if (selectedValue.equals("All"))
+                    updateTable();
+                else if (selectedValue.equals("Week"))
+                    updateTable('w');
+                else if (selectedValue.equals("Month"))
+                    updateTable('m');                
             }
         });
         
@@ -130,7 +136,13 @@ public class AppointmentTabController extends Controller implements AppointmentQ
      * Queries the appointment table from the client_schedule database and stores each record a list.
      * Clears the current table replaces the records with the new List.
      */
-    private void updateTable() {
+    private void updateTable(char... flag) {
+        try {
+            System.out.println(flag[0]);
+        } catch (Exception e){
+            System.out.println("a");
+        }
+        
         List<Appointment> appointments = getAppointments();
         appointmentTable.getItems().clear();
         appointmentTable.getItems().addAll(appointments);

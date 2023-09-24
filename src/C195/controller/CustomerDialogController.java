@@ -102,7 +102,7 @@ public class CustomerDialogController extends Controller implements CountryQuery
                         address,
                         postalCode,
                         phone,
-                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
                         1,
                         customer.getId()
@@ -117,9 +117,9 @@ public class CustomerDialogController extends Controller implements CountryQuery
                         address,
                         postalCode,
                         phone,
-                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
-                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
                         1
                         )) {

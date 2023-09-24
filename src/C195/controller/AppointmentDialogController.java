@@ -16,6 +16,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,7 +51,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
     DatePicker datePicker;
 
     @FXML
-    ComboBox<Integer> customerComboBox, userComboBox, contactComboBox;
+    ComboBox<String> customerComboBox, contactComboBox;
 
     @FXML
     Spinner startHourSpinner, startMinuteSpinner, endHourSpinner, endMinuteSpinner;
@@ -63,6 +64,12 @@ public class AppointmentDialogController extends Controller implements ContactQu
 
     private boolean modified;
     private Appointment appointment;
+    
+    private HashMap<String, Integer> customerMap = new HashMap<>();
+    private HashMap<String, Integer> contactMap = new HashMap<>();
+    
+    private HashMap<Integer, String> reverseCustomerMap = new HashMap<>();
+    private HashMap<Integer, String> reverseContactMap = new HashMap<>();
 
     /**
      * Submits the appointment.
@@ -75,13 +82,15 @@ public class AppointmentDialogController extends Controller implements ContactQu
                 description = descriptionField.getText(),
                 location = locationField.getText(),
                 type = typeField.getText(),
-                editedBy = editedByField.getText();
+                editedBy = User.getUser().getName(),
+                customer = "", contact = "", user = "";
 
         LocalDate startDate = datePicker.getValue();
-        // setting these fields to an inital value that is not possible
-        int customerId = -1, userId = -1, contactId = -1,
-                startHour = (int) startHourSpinner.getValue(), startMinute = (int) startMinuteSpinner.getValue(),
-                endHour = (int) endHourSpinner.getValue(), endMinute = (int) endMinuteSpinner.getValue();
+        
+        int startHour = (int) startHourSpinner.getValue(), startMinute = (int) startMinuteSpinner.getValue(),
+            endHour = (int) endHourSpinner.getValue(), endMinute = (int) endMinuteSpinner.getValue(),
+            userId = User.getUser().getId(),
+            contactId = -1, customerId = -1;
 
         String errorString = "";
         boolean valid = true;
@@ -109,26 +118,18 @@ public class AppointmentDialogController extends Controller implements ContactQu
             valid = false;
         }
 
-        // retrieving absent primateves thows errors that need to be dealt with
-        try {
-            customerId = customerComboBox.getValue();
-        } catch (Exception e) {
+        if (customerComboBox.getValue() == null) {
             errorString += "Customer ID cannot be blank\n\n";
             valid = false;
+        } else {
+            customerId = customerMap.get(customerComboBox.getValue());
         }
 
-        try {
-            contactId = contactComboBox.getValue();
-        } catch (Exception e) {
+        if (contactComboBox.getValue() == null) {
             errorString += "Contact ID cannot be blank\n\n";
             valid = false;
-        }
-
-        try {
-            userId = userComboBox.getValue();
-        } catch (Exception e) {
-            errorString += "User ID cannot be blank\n\n";
-            valid = false;
+        } else {
+            contactId = contactMap.get(contactComboBox.getValue());
         }
 
         // Formatting time.
@@ -246,12 +247,12 @@ public class AppointmentDialogController extends Controller implements ContactQu
         modified = true;
 
         appointmentFlagLabel.setText("Modify Appointment");
-        editedByLabel.setText(" Last Edited by");
+        editedByLabel.setText("Last Edited by");
 
         // Formatting the time correctly.
         if (startHour >= 12) {
             startPmRadioButton.setSelected(true);
-            startHour %= 12;
+            if (startHour != 12) startHour %= 12;
         } else {
             if (startHour == 0) {
                 startHour = 12;
@@ -260,7 +261,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
 
         if (endHour >= 12) {
             endPmRadioButton.setSelected(true);
-            endHour %= 12;
+            if (endHour != 12) endHour %= 12;
         } else {
             if (endHour == 0) {
                 endHour = 12;
@@ -278,10 +279,8 @@ public class AppointmentDialogController extends Controller implements ContactQu
         endMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59, endMinute));
         editedByField.setText(appointment.getLastUpdatedBy());
 
-        userComboBox.setValue(appointment.getUserId());
-        customerComboBox.setValue(appointment.getCustomerId());
-        contactComboBox.setValue(appointment.getContactId());
-
+        customerComboBox.setValue(reverseCustomerMap.get(appointment.getCustomerId()));
+        contactComboBox.setValue(reverseContactMap.get(appointment.getContactId()));
     }
 
     /**
@@ -302,15 +301,15 @@ public class AppointmentDialogController extends Controller implements ContactQu
         editedByField.setText(User.getUser().getName());
         
         for (Contact contact : getContacts()) {
-            contactComboBox.getItems().add(contact.getId());
-        }
-
-        for (User user : getUsers()) {
-            userComboBox.getItems().add(user.getId());
+            contactMap.put(contact.getName(), contact.getId());
+            reverseContactMap.put(contact.getId(), contact.getName());
+            contactComboBox.getItems().add(contact.getName());
         }
 
         for (Customer customer : getCustomers()) {
-            customerComboBox.getItems().add(customer.getId());
+            customerMap.put(customer.getName(), customer.getId());
+            reverseCustomerMap.put(customer.getId(), customer.getName());
+            customerComboBox.getItems().add(customer.getName());
         }
         
         datePicker.setValue(LocalDate.now());
