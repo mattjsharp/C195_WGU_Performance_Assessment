@@ -57,10 +57,10 @@
       </HBox>
       <TableView fx:id="appointmentTable" prefHeight="397.0" prefWidth="900.0">
          <columns>
-            <TableColumn fx:id="appointmentIdColumn" prefWidth="106.0" />
-            <TableColumn fx:id="appointmentTitleColumn" prefWidth="86.0" />
-            <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="85.0" />
-            <TableColumn fx:id="appointmentLocationColumn" prefWidth="62.0" />
+            <TableColumn fx:id="appointmentIdColumn" prefWidth="43.0" />
+            <TableColumn fx:id="appointmentTitleColumn" prefWidth="116.0" />
+            <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="91.0" />
+            <TableColumn fx:id="appointmentLocationColumn" prefWidth="89.0" />
             <TableColumn fx:id="appointmentContactIdColumn" prefWidth="69.0" />
             <TableColumn fx:id="appointmentTypeColumn" prefWidth="82.0" />
             <TableColumn fx:id="appointmentDateColumn" prefWidth="75.0" />

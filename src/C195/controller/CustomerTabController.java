@@ -127,7 +127,7 @@ public class CustomerTabController extends Controller implements CustomerQuery, 
         customerPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         customerDivisionColumn.setCellValueFactory(new PropertyValueFactory<>("divisionId"));
 
-        customerIdColumn.setText(l10n.getString("customerId"));
+        customerIdColumn.setText("ID");
         customerNameColumn.setText(l10n.getString("customerName"));
         customerZipColumn.setText(l10n.getString("postalCode"));
         customerPhoneColumn.setText(l10n.getString("phone"));

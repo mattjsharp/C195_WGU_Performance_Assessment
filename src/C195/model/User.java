@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package C195.model;
 
 import java.time.LocalDateTime;
@@ -34,6 +30,16 @@ public class User {
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdatedBy = lastUpdatedBy;
+    }
+    
+    private static User loggedOnUser = null;
+    
+    public static User getUser() {
+        return loggedOnUser;
+    }
+    
+    public static void setUser(User user) {
+        loggedOnUser = user;
     }
     
     public int getId() {

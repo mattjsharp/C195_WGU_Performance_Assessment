@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  *
@@ -32,7 +33,7 @@ public final class LoginActivityLogger {
     }
     
     public void newLog(String message) {
-        String formattedMessage = "[" + LocalDateTime.now() + "] - " + message;
+        String formattedMessage = "[" + LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime() + "] - " + message;
         writer.println(formattedMessage);
     }
 }

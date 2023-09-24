@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package C195.model;
 
 import java.time.LocalDateTime;
@@ -113,3 +109,16 @@ public class Customer {
         this.divisionId = divisionId;
     }
 }
+
+/*
+Customer_ID INT(10) (PK)
+Customer_Name VARCHAR(50)
+Address VARCHAR(100)
+Postal_Code VARCHAR(50)
+Phone VARCHAR(50)
+Create_Date DATETIME
+Created_By VARCHAR(50)
+Last_Update TIMESTAMP
+Last_Updated_By VARCHAR(50)
+Division_ID INT(10) (FK)
+*/

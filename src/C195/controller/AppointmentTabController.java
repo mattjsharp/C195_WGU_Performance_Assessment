@@ -94,7 +94,7 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         appointmentUserIdColumn.setCellValueFactory(new PropertyValueFactory<>("userId"));
 
         // Setting the text for each of the column headers.
-        appointmentIdColumn.setText(l10n.getString("appointmentId"));
+        appointmentIdColumn.setText("ID");
         appointmentTitleColumn.setText(l10n.getString("title"));
         appointmentDescriptionColumn.setText(l10n.getString("description"));
         appointmentLocationColumn.setText(l10n.getString("location"));

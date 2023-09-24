@@ -38,7 +38,9 @@ public class AppointmentDialogController extends Controller implements ContactQu
     Button submitButton, cancelButton;
 
     @FXML
-    TextField titleField,
+    TextField idField,
+            appointmentField,
+            titleField,
             descriptionField,
             locationField,
             typeField,
@@ -67,6 +69,8 @@ public class AppointmentDialogController extends Controller implements ContactQu
      * Performs tedious logical and validation checks to ensure appointments meet the correct criteria. 
      */
     public void submitDialog() {
+        editedByField.setText(User.getUser().getName());
+        
         String title = titleField.getText(),
                 description = descriptionField.getText(),
                 location = locationField.getText(),
@@ -97,10 +101,6 @@ public class AppointmentDialogController extends Controller implements ContactQu
         }
         if (type.isEmpty()) {
             errorString += "Appointment Type is required\n\n";
-            valid = false;
-        }
-        if (editedBy.isEmpty()) {
-            errorString += "A description is required\n\n";
             valid = false;
         }
 
@@ -182,10 +182,6 @@ public class AppointmentDialogController extends Controller implements ContactQu
             errorString += "Appointment cannot be scheduled on weekends EST.\n\n";
             valid = false;
         }
-        
-        
-        
-        
 
         // Final result
         if (valid) {
@@ -196,7 +192,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
                         type,
                         SQLDateFormatter.formatDate(start),
                         SQLDateFormatter.formatDate(end),
-                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
                         customerId,
                         userId,
@@ -204,7 +200,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
                         appointment.getId()
                 )) {
                     stage.close();
-                    SimpleAlert.simpleInformation("Success", "Appointment successfully modified.");
+                    SimpleAlert.simpleInformation("Success", "Appointment successfully modified by " + editedBy + ".");
                 } else {
                     SimpleAlert.simpleError("SQL Error", "Somthing went wrong with the database.");
                 }
@@ -215,9 +211,9 @@ public class AppointmentDialogController extends Controller implements ContactQu
                         type,
                         SQLDateFormatter.formatDate(start),
                         SQLDateFormatter.formatDate(end),
-                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
-                        SQLDateFormatter.formatDate(LocalDateTime.now(ZoneId.of("UTC"))),
+                        SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
                         customerId,
                         userId,
@@ -240,6 +236,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
      */
     public void setAppointment(Appointment appointment) {
         this.appointment = appointment;
+        idField.setText(String.valueOf(appointment.getId()));
 
         int startHour = appointment.getStartDate().getHour(),
                 startMinute = appointment.getStartDate().getMinute(),
@@ -249,7 +246,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
         modified = true;
 
         appointmentFlagLabel.setText("Modify Appointment");
-        editedByLabel.setText("Edited by");
+        editedByLabel.setText(" Last Edited by");
 
         // Formatting the time correctly.
         if (startHour >= 12) {
@@ -302,6 +299,8 @@ public class AppointmentDialogController extends Controller implements ContactQu
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        editedByField.setText(User.getUser().getName());
+        
         for (Contact contact : getContacts()) {
             contactComboBox.getItems().add(contact.getId());
         }

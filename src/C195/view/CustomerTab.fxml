@@ -39,11 +39,11 @@
       </HBox>
       <TableView fx:id="customerTable" prefHeight="397.0" prefWidth="900.0">
         <columns>
-          <TableColumn fx:id="customerIdColumn" prefWidth="140.0" />
-          <TableColumn fx:id="customerNameColumn" prefWidth="121.0" />
-            <TableColumn fx:id="customerZipColumn" prefWidth="143.0" />
-            <TableColumn fx:id="customerPhoneColumn" prefWidth="157.0" />
-            <TableColumn fx:id="customerDivisionColumn" prefWidth="169.0" />
+          <TableColumn fx:id="customerIdColumn" prefWidth="58.0" />
+          <TableColumn fx:id="customerNameColumn" prefWidth="140.0" />
+            <TableColumn fx:id="customerZipColumn" prefWidth="169.0" />
+            <TableColumn fx:id="customerPhoneColumn" prefWidth="165.0" />
+            <TableColumn fx:id="customerDivisionColumn" prefWidth="164.0" />
         </columns>
       </TableView>
    </children>
