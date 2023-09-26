@@ -44,8 +44,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
             titleField,
             descriptionField,
             locationField,
-            typeField,
-            editedByField;
+            typeField;
 
     @FXML
     DatePicker datePicker;
@@ -60,7 +59,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
     RadioButton startPmRadioButton, endPmRadioButton;
 
     @FXML
-    Label appointmentFlagLabel, editedByLabel;
+    Label appointmentFlagLabel, editedByLabel, editedByField;
 
     private boolean modified;
     private Appointment appointment;
@@ -247,7 +246,7 @@ public class AppointmentDialogController extends Controller implements ContactQu
         modified = true;
 
         appointmentFlagLabel.setText("Modify Appointment");
-        editedByLabel.setText("Last Edited by");
+        editedByLabel.setText("Last Edited by: ");
 
         // Formatting the time correctly.
         if (startHour >= 12) {

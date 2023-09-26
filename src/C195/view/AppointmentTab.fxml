@@ -37,7 +37,7 @@
                         <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <RadioButton contentDisplay="CENTER" mnemonicParsing="false" selected="true" text="All" GridPane.rowIndex="1">
+                        <RadioButton fx:id="allRadioButton" contentDisplay="CENTER" mnemonicParsing="false" selected="true" text="All" GridPane.rowIndex="1">
                            <toggleGroup>
                               <ToggleGroup fx:id="appointmentSort" />
                            </toggleGroup>
@@ -53,6 +53,15 @@
                   </GridPane>
                </children>
             </HBox>
+            <VBox alignment="CENTER" prefHeight="107.0" prefWidth="293.0">
+               <children>
+                  <Label fx:id="sortLabel">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
          </children>
       </HBox>
       <TableView fx:id="appointmentTable" prefHeight="397.0" prefWidth="900.0">

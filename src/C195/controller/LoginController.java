@@ -57,13 +57,13 @@ public class LoginController extends Controller implements LoginQuery, UserQuery
         if (username.isEmpty() || password.isEmpty()) {
             errorString = errorString + (valid ? "" : "\n") + l10n.getString("err1");
             valid = false;
-            logger.newLog("FAIL: empty username and/or passord field(s)");
+            logger.newLog("LOGIN FAIL: empty username and/or passord field(s)");
         }
         User user = login(username, password);
         if (user == null) {
             errorString = errorString + (valid ? "" : "\n") + l10n.getString("err2");
             valid = false;
-            logger.newLog("FAIL: credentials not found for \"" + username + "\"");
+            logger.newLog("LOGIN FAIL: credentials not found for \"" + username + "\"");
         }
 
         errorLabel.setManaged(!valid);
@@ -71,7 +71,7 @@ public class LoginController extends Controller implements LoginQuery, UserQuery
 
         if (valid) {
             User.setUser(user);
-            logger.newLog("SUCCESS: \"" + username + "\" logged in successfully");
+            logger.newLog("LOGIN SUCCESS: \"" + username + "\" logged in successfully");
             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
             Scene scene = new Scene(FXMLLoader.load(getClass().getResource("../view/Main.fxml")));
             stage.setScene(scene);
