@@ -167,9 +167,9 @@ public class AppointmentTabController extends Controller implements AppointmentQ
                     sortLabel.setText(String.valueOf(start.getMonth()));
                 }
                 case 'w' -> {
-                    LocalDateTime current = LocalDateTime.of(LocalDateTime.now().toLocalDate(), LocalTime.of(0, 0));
+                    LocalDateTime current = LocalDateTime.of(LocalDateTime.now().toLocalDate(), LocalTime.of(23, 59));
                     start = current.minusDays(current.getDayOfWeek().compareTo(DayOfWeek.MONDAY));
-                    end = start.plusDays(5);
+                    end = start.plusDays(7);
                     sortLabel.setText(months[start.getMonthValue() - 1] + " " + start.getDayOfMonth() + " - " + months[end.getMonthValue() - 1] + " " + end.minusDays(1).getDayOfMonth());
                 }
                 default -> {
@@ -288,13 +288,13 @@ public class AppointmentTabController extends Controller implements AppointmentQ
         for (Appointment appointment : appointments) {
             int minutesDifference = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), appointment.getStartDate());
             if (minutesDifference <= 15 && minutesDifference > 0) {
-                appointmentDescription += "ID: " + appointment.getId() + "\tSTART: " + appointment.getFormattedStartDate() + "\tTITLE: " + appointment.getTitle() + "\n\n";
+                appointmentDescription += "ID: " + appointment.getId() + "\tSTART: " + appointment.getStartTime() + " " + appointment.getFormattedStartDate() + "\tTITLE: " + appointment.getTitle() + "\n\n";
                 appointmentCount++;
             }
         }
 
         if (appointmentCount > 0) {
-            SimpleAlert.simpleWarning("" + appointmentCount + " Near Appointments", "There are " + appointmentCount + " appointments within the near future:\n\n" + appointmentDescription);
+            SimpleAlert.simpleWarning("" + appointmentCount + " Near Appointments", "There are " + appointmentCount + " appointment(s) within the near future:\n\n" + appointmentDescription);
         } else {
             SimpleAlert.simpleInformation("No Appointments", "There are no appointments scheduded in the near future.");
         }

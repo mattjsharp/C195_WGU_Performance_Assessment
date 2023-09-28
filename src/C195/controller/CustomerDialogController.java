@@ -41,8 +41,11 @@ public class CustomerDialogController extends Controller implements CountryQuery
     @FXML
     ComboBox<String> countryComboBox, divisionComboBox;
 
-    private HashMap<String, Integer> countryMap = new HashMap<>();
+    // Creating maps to cashe values of ids to names and vice versa.
+    private HashMap<Integer, String> countryMap = new HashMap<>();
+    private HashMap<String, Integer> reverseCountryMap = new HashMap<>();
     private HashMap<Integer, String> divisionMap = new HashMap<>();
+    private HashMap<String, Integer> reverseDivisionMap = new HashMap<>();
     
     private Customer customer;
     private boolean modified;
@@ -91,10 +94,6 @@ public class CustomerDialogController extends Controller implements CountryQuery
             errorString += "Phone number must not be blank\n\n";
             valid = false;
         }
-        
-//        try {
-//            countryId = countryComboBox.getValue();
-//        }
 
         if (valid) {
             if (modified) {
@@ -104,7 +103,7 @@ public class CustomerDialogController extends Controller implements CountryQuery
                         phone,
                         SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
-                        1,
+                        reverseDivisionMap.get(divisionComboBox.getValue()),
                         customer.getId()
                 )) {
                     stage.close();
@@ -121,7 +120,7 @@ public class CustomerDialogController extends Controller implements CountryQuery
                         editedBy,
                         SQLDateFormatter.formatDate(LocalDateTime.now().atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime()),
                         editedBy,
-                        1
+                        reverseDivisionMap.get(divisionComboBox.getValue())
                         )) {
                     stage.close();
                     SimpleAlert.simpleInformation("Success", "Customer was successfull added.");
@@ -137,9 +136,10 @@ public class CustomerDialogController extends Controller implements CountryQuery
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
-        editedByLabel.setText("Last Edited By");
         
         modified = true;
+        
+        editedByLabel.setText("Last Edited By");
         customerFlagLabel.setText("Modify Customer");
         idField.setText(String.valueOf(customer.getId()));
         nameField.setText(customer.getName());
@@ -147,16 +147,18 @@ public class CustomerDialogController extends Controller implements CountryQuery
         postalCodeField.setText(customer.getPostalCode());
         phoneField.setText(customer.getPhone());  
         editedByField.setText(User.getUser().getName());
-        countryComboBox.setValue(getCountries(customer.getId()).get(0).getName());
+        countryComboBox.setValue(countryMap.get(getCountryCode(customer.getDivisionId())));
         setDivisions();
         divisionComboBox.setValue(divisionMap.get(customer.getDivisionId()));
     }
 
     public void setDivisions() {
         divisionComboBox.getItems().clear();
-        List<FirstLevelDivision> divisions = getDivisions(countryMap.get(countryComboBox.getValue()));
+        List<FirstLevelDivision> divisions = getDivisions(reverseCountryMap.get(countryComboBox.getValue()));
         for (FirstLevelDivision division : divisions) {
             divisionMap.put(division.getId(), division.getName());
+            reverseDivisionMap.put(division.getName(), division.getId());
+            
             divisionComboBox.getItems().add(division.getName());
         }
     }
@@ -172,7 +174,9 @@ public class CustomerDialogController extends Controller implements CountryQuery
         editedByField.setText(User.getUser().getName());
         
         for (Country country : getCountries()) {
-            countryMap.put(country.getName(), country.getId());
+            countryMap.put(country.getId(), country.getName());
+            reverseCountryMap.put(country.getName(), country.getId());
+            
             countryComboBox.getItems().add(country.getName());
         }
     }

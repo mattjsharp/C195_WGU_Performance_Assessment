@@ -26,7 +26,7 @@ public class MainController extends Controller {
     TabPane tabPane;
 
     @FXML
-    Tab appointmentsTab, customersTab;
+    Tab appointmentsTab, customersTab, reportsTab;
     
     @FXML
     Label loggedInAsLabel, userNameLabel;
@@ -51,6 +51,7 @@ public class MainController extends Controller {
 
         appointmentsTab.setText(l10n.getString("appointments"));
         customersTab.setText(l10n.getString("customers"));
+        reportsTab.setText(l10n.getString("reports"));
         loggedInAsLabel.setText(l10n.getString("loggedInAs"));
         userNameLabel.setText(User.getUser().getName());
     }

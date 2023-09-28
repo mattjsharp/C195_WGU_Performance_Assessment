@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
  */
 public interface UpdateCustomer {
     default boolean updateCustomer(String name, String address, String postalCode, String phone, String lastUpdate, String lastUpdatedBy, int divisionId, int id) {
-        String updateSql = "UPDATE customers SET Customer_NAME = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update, Last_Updated_By, Division_ID = ? WHERE Customer_ID = ?";
+        String updateSql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
         
         try {
             PreparedStatement ps = JDBC.connection.prepareStatement(updateSql);
@@ -20,8 +20,6 @@ public interface UpdateCustomer {
             ps.setString(6, lastUpdatedBy);
             ps.setInt(7, divisionId);
             ps.setInt(8, id);
-            
-            System.out.println(ps);
             
             ps.executeUpdate();
             return true;           

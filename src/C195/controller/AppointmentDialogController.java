@@ -152,6 +152,12 @@ public class AppointmentDialogController extends Controller implements ContactQu
             }
         }
         
+        // Checking date and time ranges
+        if (LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute).isBefore(LocalDateTime.now())) {
+            errorString += "Appointments cannot be scheduled/rescheduled before current time";
+            valid = false;
+        }
+        
         // Adjusting time zone to UTC and others to EST
         LocalDateTime start = 
                 LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)
@@ -164,22 +170,14 @@ public class AppointmentDialogController extends Controller implements ContactQu
         LocalDateTime startEST = start.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
         LocalDateTime endEST = end.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
         
-        // Date Range Validation
         if (start.isAfter(end)) {
-            errorString += "Start time cannot be greter than the end time.\n\n";
+            errorString += "Start time cannot be greater than the end time.\n\n";
             valid = false;
         }
         
-        if ((startEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || startEST.toLocalTime().isAfter(LocalTime.of(17, 0))) ||
-                (endEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || endEST.toLocalTime().isAfter(LocalTime.of(17, 0)))) {
-            errorString += "Date cannot be schedlued outside of office hours:\n\t\t8:00am - 5:00pm EST\n\n";
-            valid = false;
-        }
-        
-        // Checking if either day is scheduled on a weekend.
-        if ((startEST.getDayOfWeek() == startEST.getDayOfWeek().SATURDAY || startEST.getDayOfWeek() == startEST.getDayOfWeek().SUNDAY) ||
-                (endEST.getDayOfWeek() == endEST.getDayOfWeek().SATURDAY || endEST.getDayOfWeek() == endEST.getDayOfWeek().SUNDAY)) {
-            errorString += "Appointment cannot be scheduled on weekends EST.\n\n";
+        if ((startEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || startEST.toLocalTime().isAfter(LocalTime.of(22, 0))) ||
+                (endEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || endEST.toLocalTime().isAfter(LocalTime.of(22, 0)))) {
+            errorString += "Date cannot be schedlued outside of office hours:\n\t\t8:00am - 10:00pm EST\n\n";
             valid = false;
         }
 

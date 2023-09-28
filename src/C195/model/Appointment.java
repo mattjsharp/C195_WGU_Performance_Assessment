@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import static C195.helper.TableDateTimeFormatter.*;
+import static C195.helper.QuickDateTimeFormatter.*;
 
 /**
  * Appointment Model Class.
@@ -110,11 +110,11 @@ public class Appointment {
     }
     
     public String getStartTime() {
-        return tableTimeFormater(startDate);
+        return quickTimeFormater(startDate);
     }
 
     public String getFormattedStartDate() {
-        return tableDateFormatter(startDate);
+        return quickDateFormatter(startDate);
     }
     
     public LocalDateTime getEndDate() {
@@ -122,11 +122,11 @@ public class Appointment {
     }
     
     public String getEndTime() {
-        return tableTimeFormater(endDate);
+        return quickTimeFormater(endDate);
     }
 
     public String getFormattedEndDate() {
-        return tableDateFormatter(endDate);
+        return quickDateFormatter(endDate);
     }
     
     public LocalDateTime getCreationDate() {
@@ -134,7 +134,7 @@ public class Appointment {
     }
 
     public String getFormattedCreationDate() {
-        return tableDateFormatter(creationDate);
+        return quickDateFormatter(creationDate);
     }
 
     public String getCreatedBy() {
@@ -146,7 +146,7 @@ public class Appointment {
     }
 
     public String getFormattedLastUpdate() {
-        return tableDateFormatter(lastUpdate);
+        return quickDateFormatter(lastUpdate);
     }
 
     public String getLastUpdatedBy() {

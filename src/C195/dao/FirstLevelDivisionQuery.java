@@ -36,4 +36,23 @@ public interface FirstLevelDivisionQuery {
 
         return divisions;
     }
+    
+    default int getCountryCode(int code) {
+        String sql = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = " + code + ";";
+        
+        try {
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            java.sql.ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("Country_ID");
+            } else {
+                throw new Exception();
+            }
+                    
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return 0;
+        }
+    }
 }
