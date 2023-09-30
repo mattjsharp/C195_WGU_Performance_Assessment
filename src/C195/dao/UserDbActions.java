@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author LabUser
  */
-public interface UserQuery {
+public interface UserDbActions {
     default List<User> getUsers() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";

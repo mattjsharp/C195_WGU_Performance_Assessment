@@ -1,8 +1,6 @@
 package C195.controller;
 
 import C195.model.Appointment;
-import C195.dao.AppointmentQuery;
-import C195.dao.DeleteAppointment;
 import C195.helper.SimpleAlert;
 import java.io.IOException;
 import java.net.URL;
@@ -28,12 +26,13 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import C195.dao.AppointmentDbActions;
 
 /**
  *
  * @author LabUser
  */
-public class AppointmentTabController extends Controller implements AppointmentQuery, DeleteAppointment {
+public class AppointmentTabController extends Controller implements AppointmentDbActions {
 
     @FXML
     public TableView<Appointment> appointmentTable;

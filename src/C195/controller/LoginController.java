@@ -1,7 +1,6 @@
 package C195.controller;
 
 import C195.dao.LoginQuery;
-import C195.dao.UserQuery;
 import C195.helper.LoginActivityLogger;
 import C195.model.User;
 import java.io.IOException;
@@ -19,12 +18,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import C195.dao.UserDbActions;
 
 /**
  *
  * @author LabUser
  */
-public class LoginController extends Controller implements LoginQuery, UserQuery {
+public class LoginController extends Controller implements LoginQuery, UserDbActions {
 
     @FXML
     TextField usernameField;

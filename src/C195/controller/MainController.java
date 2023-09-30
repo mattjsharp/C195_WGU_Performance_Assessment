@@ -59,9 +59,11 @@ public class MainController extends Controller {
     private void initMain() throws IOException {
         FXMLLoader appointmentTabLoader = new FXMLLoader(getClass().getResource("../view/AppointmentTab.fxml"));
         FXMLLoader customerTabLoader = new FXMLLoader(getClass().getResource("../view/CustomerTab.fxml"));
+        FXMLLoader reportTabLoader = new FXMLLoader(getClass().getResource("../view/ReportTab.fxml"));
         
         appointmentsTab.setContent(appointmentTabLoader.load());
         customersTab.setContent(customerTabLoader.load());
+        reportsTab.setContent(reportTabLoader.load());
         
         appointmentTabController = appointmentTabLoader.getController();
         customerTabController = customerTabLoader.load();

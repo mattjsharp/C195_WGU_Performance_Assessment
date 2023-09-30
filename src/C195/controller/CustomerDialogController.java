@@ -1,9 +1,5 @@
 package C195.controller;
 
-import C195.dao.CountryQuery;
-import C195.dao.FirstLevelDivisionQuery;
-import C195.dao.InsertCustomer;
-import C195.dao.UpdateCustomer;
 import C195.helper.SQLDateFormatter;
 import C195.helper.SimpleAlert;
 import C195.model.Country;
@@ -21,13 +17,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import C195.dao.CountryDbActions;
+import C195.dao.CustomerDbActions;
+import C195.dao.FirstLevelDivisionDbActions;
 
 /**
  * FXML Controller class
  *
  * @author LabUser
  */
-public class CustomerDialogController extends Controller implements CountryQuery, FirstLevelDivisionQuery, InsertCustomer, UpdateCustomer {
+public class CustomerDialogController extends Controller implements CountryDbActions, FirstLevelDivisionDbActions, CustomerDbActions {
 
     @FXML
     Button cancelButton, submitButton;

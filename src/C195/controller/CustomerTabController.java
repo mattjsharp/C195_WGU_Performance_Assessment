@@ -1,8 +1,5 @@
 package C195.controller;
 
-import C195.dao.CustomerInAppointmentQuery;
-import C195.dao.CustomerQuery;
-import C195.dao.DeleteCustomer;
 import C195.helper.SimpleAlert;
 import C195.model.Customer;
 import java.io.IOException;
@@ -19,13 +16,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import C195.dao.CustomerDbActions;
 
 /**
  * FXML Controller class
  *
  * @author LabUser
  */
-public class CustomerTabController extends Controller implements CustomerQuery, CustomerInAppointmentQuery, DeleteCustomer {
+public class CustomerTabController extends Controller implements CustomerDbActions {
 
     @FXML
     TableView customerTable;

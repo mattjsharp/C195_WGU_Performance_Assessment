@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author LabUser
  */
-public interface FirstLevelDivisionQuery {
+public interface FirstLevelDivisionDbActions {
     default List<FirstLevelDivision> getDivisions(int countryId) {
         List<FirstLevelDivision> divisions = new ArrayList<>();
         String sql = "SELECT * FROM first_level_divisions WHERE Country_ID = " + countryId + ";";

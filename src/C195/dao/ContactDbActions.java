@@ -1,6 +1,7 @@
 package C195.dao;
 
 import C195.model.Contact;
+import C195.model.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
  *
  * @author LabUser
  */
-public interface ContactQuery {
+public interface ContactDbActions {
 
     default List<Contact> getContacts() {
         List<Contact> contacts = new ArrayList<>();

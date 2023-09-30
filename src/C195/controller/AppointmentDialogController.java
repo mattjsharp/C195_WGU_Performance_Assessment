@@ -1,10 +1,5 @@
 package C195.controller;
 
-import C195.dao.ContactQuery;
-import C195.dao.CustomerQuery;
-import C195.dao.InsertAppointment;
-import C195.dao.UpdateAppointment;
-import C195.dao.UserQuery;
 import C195.helper.SQLDateFormatter;
 import C195.helper.SimpleAlert;
 import C195.model.Appointment;
@@ -27,13 +22,17 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory;
 import javafx.scene.control.TextField;
+import C195.dao.AppointmentDbActions;
+import C195.dao.ContactDbActions;
+import C195.dao.CustomerDbActions;
+import C195.dao.UserDbActions;
 
 /**
  * FXML Controller class
  *
  * @author LabUser
  */
-public class AppointmentDialogController extends Controller implements ContactQuery, UserQuery, CustomerQuery, InsertAppointment, UpdateAppointment {
+public class AppointmentDialogController extends Controller implements ContactDbActions, UserDbActions, CustomerDbActions, AppointmentDbActions {
 
     @FXML
     Button submitButton, cancelButton;

@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author LabUser
  */
-public interface CountryQuery {
+public interface CountryDbActions {
 
     default List<Country> getCountries() {
         List<Country> countries = new ArrayList<>();
