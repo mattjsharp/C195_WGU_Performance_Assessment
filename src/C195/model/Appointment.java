@@ -15,19 +15,19 @@ import static C195.helper.QuickDateTimeFormatter.*;
 public class Appointment {
 
     private final int id;
-    private String title;
-    private String description;
-    private String location;
-    private String type;
-    private LocalDateTime startDate;
-    private LocalDateTime endDate;
+    private final String title;
+    private final String description;
+    private final String location;
+    private final String type;
+    private final LocalDateTime startDate;
+    private final LocalDateTime endDate;
     private final LocalDateTime creationDate;
     private final String createdBy;
-    private LocalDateTime lastUpdate;
-    private String lastUpdatedBy;
-    private int customerId;
-    private int userId;
-    private int contactId;
+    private final LocalDateTime lastUpdate;
+    private final String lastUpdatedBy;
+    private final int customerId;
+    private final int userId;
+    private final int contactId;
 
     /**
      * Constructor for the Appointment class.
@@ -114,7 +114,7 @@ public class Appointment {
     }
 
     public String getFormattedStartDate() {
-        return quickDateFormatter(startDate);
+        return quickDateFormatter(startDate) + " " + startDate.getYear();
     }
     
     public LocalDateTime getEndDate() {

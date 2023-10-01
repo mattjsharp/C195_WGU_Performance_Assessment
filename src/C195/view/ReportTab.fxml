@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <VBox alignment="CENTER" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.ReportTabController">
    <children>
@@ -18,6 +18,9 @@
             </Label>
          </children>
       </HBox>
-      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" prefHeight="434.0" prefWidth="751.0" vbarPolicy="ALWAYS" />
+      <ScrollPane fx:id="scrollPane" hbarPolicy="ALWAYS" prefHeight="434.0" prefWidth="751.0" vbarPolicy="ALWAYS">
+         <padding>
+            <Insets right="30.0" />
+         </padding></ScrollPane>
    </children>
 </VBox>

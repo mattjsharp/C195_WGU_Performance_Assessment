@@ -62,14 +62,17 @@ public class PieChartController extends Controller implements AppointmentDbActio
     public void setChart() {
         pieChartData = FXCollections.observableArrayList();
         List<PieChartSection> appointments = getDistinctAppointments(months.get(pieMonthComboBox.getValue()), (int) pieYearComboBox.getValue());
+        int total = 0;
         
-        for (PieChartSection appointment : appointments)
-            pieChartData.add(new PieChart.Data(appointment.TYPE, appointment.NUMBER)); 
+        for (PieChartSection appointment : appointments) {
+            pieChartData.add(new PieChart.Data(appointment.TYPE, appointment.NUMBER));
+            total += appointment.NUMBER;
+        }
 
         appointmentPieChart.setData(pieChartData);
         
         // Updating the total label.
-        totalLabel.setText("Total: " + appointments.size());
+        totalLabel.setText("Total: " + total);
         
         // Updating the year combobox.
         int[] range = getYearRange();

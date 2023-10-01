@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.ContactTabeReportController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="Showing Appointments For: ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="contactComboBox" onAction="#setCustomer" prefHeight="25.0" prefWidth="108.0" />
+            <Label text=" / ">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="contactIdLabel">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets left="30.0" />
+         </padding>
+      </HBox>
+      <TableView fx:id="appointmentTable" prefHeight="345.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="appointmentIdColumn" prefWidth="44.0" text="ID" />
+          <TableColumn fx:id="appointmentTitleColumn" prefWidth="55.0" text="Title" />
+            <TableColumn fx:id="appointmentTypeColumn" prefWidth="77.0" text="Type" />
+            <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="143.0" text="Description" />
+            <TableColumn fx:id="appointmentStartColumn" prefWidth="78.0" text="Start" />
+            <TableColumn fx:id="appointmentEndColumn" prefWidth="53.0" text="End" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="79.0" text="Customer ID" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>

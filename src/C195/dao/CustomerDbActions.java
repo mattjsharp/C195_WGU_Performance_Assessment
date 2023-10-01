@@ -4,6 +4,7 @@ import C195.model.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -40,6 +41,24 @@ public interface CustomerDbActions {
         }
 
         return customers;
+    }
+    
+    default HashMap<Integer, Integer> getCustomerDivisionList() {
+        HashMap<Integer, Integer> customerAmountMap = new HashMap<>();
+        String sql = "SELECT COUNT(Customer_ID) AS customerCount, Division_ID FROM customers GROUP BY Division_ID;";
+        
+        try {
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                customerAmountMap.put(rs.getInt("Division_ID"), rs.getInt("customerCount"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return customerAmountMap;
     }
 
     /**
@@ -93,8 +112,6 @@ public interface CustomerDbActions {
             ps.setString(7, lastUpdate);
             ps.setString(8, lastUpdatedBy);
             ps.setInt(9, divisionId);
-
-            System.out.println(ps);
 
             ps.executeUpdate();
             return true;
