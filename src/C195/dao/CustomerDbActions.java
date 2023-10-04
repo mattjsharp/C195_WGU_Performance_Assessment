@@ -43,6 +43,38 @@ public interface CustomerDbActions {
         return customers;
     }
     
+    default List<Customer> getCustomersByCountry(int countryId) {
+        List<Customer> customers = new ArrayList<>();
+        String sql = "SELECT * FROM customers WHERE Division_ID IN (SELECT Division_ID FROM first_level_divisions WHERE Country_ID = ?);";
+
+        try {
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ps.setInt(1, countryId);
+            
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                customers.add(new Customer(
+                        rs.getInt("Customer_ID"),
+                        rs.getString("Customer_Name"),
+                        rs.getString("Address"),
+                        rs.getString("Postal_Code"),
+                        rs.getString("Phone"),
+                        rs.getTimestamp("Create_Date").toLocalDateTime(),
+                        rs.getString("Created_By"),
+                        rs.getTimestamp("Last_Update").toLocalDateTime(),
+                        rs.getString("Last_Updated_By"),
+                        rs.getInt("Division_ID")
+                )
+                );
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return customers;
+    }
+    
     default HashMap<Integer, Integer> getCustomerDivisionList() {
         HashMap<Integer, Integer> customerAmountMap = new HashMap<>();
         String sql = "SELECT COUNT(Customer_ID) AS customerCount, Division_ID FROM customers GROUP BY Division_ID;";

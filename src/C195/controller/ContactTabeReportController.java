@@ -67,7 +67,7 @@ public class ContactTabeReportController extends Controller implements Appointme
         appointmentDescriptionColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         customerIdColumn.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         appointmentTypeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+        appointmentStartColumn.setCellValueFactory(new PropertyValueFactory<>("formattedStartDate"));
         appointmentEndColumn.setCellValueFactory(new PropertyValueFactory<>("endTime"));
         
         contacts = getContacts();

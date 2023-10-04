@@ -151,12 +151,6 @@ public class AppointmentDialogController extends Controller implements ContactDb
             }
         }
         
-        // Checking date and time ranges
-        if (LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute).isBefore(LocalDateTime.now())) {
-            errorString += "Appointments cannot be scheduled/rescheduled before current time";
-            valid = false;
-        }
-        
         // Adjusting time zone to UTC and others to EST
         LocalDateTime start = 
                 LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)

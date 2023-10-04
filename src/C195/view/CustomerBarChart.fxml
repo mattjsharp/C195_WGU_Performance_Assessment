@@ -28,7 +28,7 @@
                 <CategoryAxis fx:id="countryAxis" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis fx:id="numberAxis" side="LEFT" />
+                <NumberAxis fx:id="numberAxis" minorTickCount="0" side="LEFT" />
               </yAxis>
             </BarChart>
          </children></VBox>

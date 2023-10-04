@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="530.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.ContactTabeReportController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="560.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.ContactTabeReportController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -19,7 +19,7 @@
                </font>
             </Label>
             <ComboBox fx:id="contactComboBox" onAction="#setCustomer" prefHeight="25.0" prefWidth="108.0" />
-            <Label text=" / ">
+            <Label text=" ID: ">
                <font>
                   <Font size="16.0" />
                </font>
@@ -44,8 +44,8 @@
             <TableColumn fx:id="appointmentTypeColumn" prefWidth="77.0" text="Type" />
             <TableColumn fx:id="appointmentDescriptionColumn" prefWidth="143.0" text="Description" />
             <TableColumn fx:id="appointmentStartColumn" prefWidth="78.0" text="Start" />
-            <TableColumn fx:id="appointmentEndColumn" prefWidth="53.0" text="End" />
-            <TableColumn fx:id="customerIdColumn" prefWidth="79.0" text="Customer ID" />
+            <TableColumn fx:id="appointmentEndColumn" prefWidth="66.0" text="End" />
+            <TableColumn fx:id="customerIdColumn" prefWidth="96.0" text="Customer ID" />
         </columns>
       </TableView>
    </children>
