@@ -1,16 +1,14 @@
 package C195.model;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import static C195.helper.QuickDateTimeFormatter.*;
 
 /**
- * Appointment Model Class.
- * Model class representing appointments stored on the client_schedule database.
+ * Appointment Model Class representing appointments stored on the client_schedule database.
  * Many of the getters here are only for access by the property value factories to be displayed in tables without formatting.
- * @author LabUser
+ * 
+ * @author mattjsharp
  */
 public class Appointment {
 
@@ -79,88 +77,168 @@ public class Appointment {
 
     /**
      *
-     * @return Appointment ID.
+     * @return The appointment ID.
      */
     public int getId() {
         return id;
     }
 
+    /**
+     * 
+     * @return the appointment title.
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * 
+     * @return The appointment description.
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * 
+     * @return An address string representing the location of the appointment.
+     */
     public String getLocation() {
         return location;
     }
 
+    /**
+     * 
+     * @return The type of Appointment scheduled.
+     */
     public String getType() {
         return type;
     }
     
+    /**
+     * 
+     * @return A local date object with set for the day the appointment takes place.
+     */
     public LocalDate getDate() {
         return startDate.toLocalDate();
     }
     
+    /**
+     * 
+     * @return Date and time that the appointment takes place.
+     */
     public LocalDateTime getStartDate() {
         return startDate;
     }
     
+    /**
+     * 
+     * @return A String that signifies what time the appointment takes place on a 12 hour clock.
+     */
     public String getStartTime() {
         return quickTimeFormater(startDate);
     }
 
+    /**
+     * Same as calling getStartTime method but with the year included.
+     * @return String with the start date and time on a 12 hour clock.
+     */
     public String getFormattedStartDate() {
-        return quickDateFormatter(startDate) + " " + startDate.getYear();
+        return getStartTime() + " " + startDate.getYear();
     }
     
+    /**
+     * 
+     * @return Date and time that the appointment ends. 
+     */
     public LocalDateTime getEndDate() {
         return endDate;
     }
     
+    /**
+     * 
+     * @return A string containing the time that the appointment ends in 12-hour time.
+     */
     public String getEndTime() {
         return quickTimeFormater(endDate);
     }
 
+    /**
+     * 
+     * @return A string containing the date 12-time the appointment ends.
+     */
     public String getFormattedEndDate() {
         return quickDateFormatter(endDate);
     }
     
+    /**
+     * 
+     * @return The Date and time the appointment was created.
+     */
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
+    /**
+     * 
+     * @return A string containing a formatted dat and time that the appointment was created.
+     */
     public String getFormattedCreationDate() {
         return quickDateFormatter(creationDate);
     }
 
+    /**
+     * 
+     * @return The username who created the appointment.
+     */
     public String getCreatedBy() {
         return createdBy;
     }
     
+    /**
+     * 
+     * @return The date and time the appointment was created.
+     */
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
+    /**
+     * 
+     * @return A string containing a formatted date and time that the appointment was last updated.
+     */
     public String getFormattedLastUpdate() {
         return quickDateFormatter(lastUpdate);
     }
 
+    /**
+     * 
+     * @return The username of the last user to update the appointment.
+     */
     public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
 
+    /**
+     * 
+     * @return The ID of the customer who this appointment is scheduled for.
+     */
     public int getCustomerId() {
         return customerId;
     }
 
+    /**
+     * The ID of who this appointment was last scheduled by.
+     * @return 
+     */
     public int getUserId() {
         return userId;
     }
     
+    /**
+     * 
+     * @return The ID of the associated contact with this appointment.
+     */
     public int getContactId() {
         return contactId;
     }

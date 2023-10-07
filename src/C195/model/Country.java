@@ -3,8 +3,10 @@ package C195.model;
 import java.time.LocalDateTime;
 
 /**
- *
- * @author LabUser
+ * Model class representing countries stored on the client_schedule database.
+ * Most fields are not used and no getter is provided.
+ * 
+ * @author mattjsharp
  */
 public class Country {
     private final int id;
@@ -14,6 +16,16 @@ public class Country {
     private final LocalDateTime lastUpdate;
     private final String lastUpdatedBy;
     
+    /**
+     * Constructor method for the country objects.
+     * 
+     * @param id
+     * @param name
+     * @param createDate
+     * @param createdBy
+     * @param lastUpdate
+     * @param lastUpdatedBy 
+     */
     public Country(int id, String name, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy) {
         this.id  = id;
         this.name = name;
@@ -29,22 +41,6 @@ public class Country {
     
     public String getName() {
         return name;
-    }
-    
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-    
-    public String getCreatedBy() {
-        return createdBy;
-    }
-    
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-    
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
     }
 }
 

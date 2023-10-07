@@ -42,14 +42,13 @@ public class CustomerBarChartController extends Controller implements CountryDbA
     private HashMap<String, Integer> countryMap = new HashMap<>();
     private HashMap<Integer, String> divisionMap;
 
-    private List<Country> countires = getCountries();
+    private final List<Country> countires = getCountries();
     private List<Customer> customers;
     private List<FirstLevelDivision> divisions;
 
     public void updateChart() {
         chart.getData().clear();
         
-        int id = countryMap.get(countryComboBox.getValue());
         customers = getCustomersByCountry(countryMap.get(countryComboBox.getValue()));
         divisions = getDivisions(countryMap.get(countryComboBox.getValue()));
         divisionMap = new HashMap<>();
@@ -63,22 +62,23 @@ public class CustomerBarChartController extends Controller implements CountryDbA
                     customerList.add(customer);
                 }
             }
-            if (customerList.size() > 0) {
+            if (!customerList.isEmpty()) {
                 sortedCustomerList.add(customerList);
             }
         }
 
         for (ArrayList<Customer> list : sortedCustomerList) {
-            System.out.println(divisionMap.get(list.get(0).getDivisionId()) + " " + list.size());
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
-            series.setName(divisionMap.get(list.get(0).getDivisionId()));
+            series.setName(divisionMap.get(list.get(0).getDivisionId()) + " (" + list.size() + ")");
             series.getData().add(new XYChart.Data<>(divisionMap.get(list.get(0).getDivisionId()), list.size()));
             chart.getData().add(series);
         }
     }
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class
+     * @param url.
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

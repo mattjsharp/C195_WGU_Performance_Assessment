@@ -3,8 +3,9 @@ package C195.model;
 import java.time.LocalDateTime;
 
 /**
- *
- * @author LabUser
+ * Model class representing customers stored on the client_schedule database.
+ * 
+ * @author mattjsharp
  */
 public class Customer {
     private final int id;
@@ -18,6 +19,20 @@ public class Customer {
     private String lastUpdatedBy;
     private int divisionId;
     
+    /**
+     * Constructor method for customer objects.
+     * 
+     * @param id
+     * @param name
+     * @param address
+     * @param postalCode
+     * @param phone
+     * @param creationDate
+     * @param createdBy
+     * @param lastUpdate
+     * @param lastUpdatedBy
+     * @param divisionId 
+     */
     public Customer(int id,
             String name,
             String address,
@@ -41,64 +56,84 @@ public class Customer {
         this.divisionId = divisionId;
     }
     
+    /**
+     * 
+     * @return The associated customer ID.
+     */
     public int getId() {
         return id;
     }
     
+    /**
+     * 
+     * @return The name of the customer.
+     */
     public String getName() {
         return name;
     }
     
-    public void setName(String name) {
-        this.name = name;
-    }
-    
+    /**
+     * 
+     * @return A String containing the address of the associated customer.
+     */
     public String getAddress() {
         return address;
     }
     
+    /**
+     * 
+     * @return A String containing the postal/zip code of the associated customer.
+     */
     public String getPostalCode() {
         return postalCode;
     }
     
+    /**
+     * 
+     * @return A String containing the phone number of the associated customer.
+     */
     public String getPhone() {
         return phone;
     }
     
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-    
+    /**
+     * 
+     * @return The date and time that the customer was created on the client_schedule database.
+     */
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
     
+    /**
+     * 
+     * @return A string containing the userid of the user who created the customer record.
+     */
     public String getCreatedBy() {
         return createdBy;
     }
     
+    /**
+     * 
+     * @return Date and time of the last time the customer was last modified.
+     */
     public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
     
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-    
+    /**
+     * 
+     * @return String containing the ussername of the last person to modify the customer record.
+     */
     public String getLastUpdatedBy() {
         return lastUpdatedBy;
     }
     
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }
-    
+    /**
+     * 
+     * @return The Division_ID of the associated customer.
+     */
     public int getDivisionId() {
         return divisionId;
-    }
-    
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
     }
 }
 

@@ -3,8 +3,10 @@ package C195.model;
 import java.time.LocalDateTime;
 
 /**
- *
- * @author LabUser
+ * Model class representing first level divisions stored on the client_schedule database.
+ * Most fields are not used and no getter is provided.
+ * 
+ * @author mattjsharp
  */
 public class FirstLevelDivision {
     private final int id;
@@ -25,34 +27,26 @@ public class FirstLevelDivision {
         this.countryId = countryId;
     }
     
+    /**
+     * 
+     * @return The id of the division.
+     */
     public int getId() {
         return id;
     }
     
+    /**
+     * 
+     * @return The associated name of the division.
+     */
     public String getName() {
         return name;
     }
     
-    public LocalDateTime getCreateDate() {
-        return createDate;
-    }
-    
     /**
-     *
-     * @return Who the record was created by.
+     * 
+     * @return The Country_ID of whichever country the record references.
      */
-    public String getCreatedBy() {
-        return createdBy;
-    }
-    
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-    
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-    
     public int getCountryId() {
         return countryId;
     }

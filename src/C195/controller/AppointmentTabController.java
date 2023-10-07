@@ -116,9 +116,6 @@ public class AppointmentTabController extends Controller implements AppointmentD
         appointmentCustomerIdColumn.setText(l10n.getString("customerId"));
         appointmentUserIdColumn.setText(l10n.getString("userId"));
 
-        // Checkin for near appointments
-        checkAppointments();
-
         // Adding and event listener to the group of radio buttons.
         appointmentSort.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
             if (newVal != null) {
@@ -272,30 +269,6 @@ public class AppointmentTabController extends Controller implements AppointmentD
                     SimpleAlert.simpleError("SQL Error", "Somthing went wrong with the database.");
                 }
             }
-        }
-    }
-
-    /**
-     * Checks if there are any appointments within 15 minutes.
-     * Queries the appointment table and checks each appointment if it meets the time criteria.
-     * Displays a message displaying either upcoming appointments or that none are near.
-     */
-    private void checkAppointments() {
-        int appointmentCount = 0;
-        String appointmentDescription = "";
-        List<Appointment> appointments = getAppointments();
-        for (Appointment appointment : appointments) {
-            int minutesDifference = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), appointment.getStartDate());
-            if (minutesDifference <= 15 && minutesDifference > 0) {
-                appointmentDescription += "ID: " + appointment.getId() + "\tSTART: " + appointment.getStartTime() + " " + appointment.getFormattedStartDate() + "\tTITLE: " + appointment.getTitle() + "\n\n";
-                appointmentCount++;
-            }
-        }
-
-        if (appointmentCount > 0) {
-            SimpleAlert.simpleWarning("" + appointmentCount + " Near Appointments", "There are " + appointmentCount + " appointment(s) within the near future:\n\n" + appointmentDescription);
-        } else {
-            SimpleAlert.simpleInformation("No Appointments", "There are no appointments scheduded in the near future.");
         }
     }
 }

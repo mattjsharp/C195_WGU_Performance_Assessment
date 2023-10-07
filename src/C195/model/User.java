@@ -3,8 +3,10 @@ package C195.model;
 import java.time.LocalDateTime;
 
 /**
- *
- * @author LabUser
+ * Model class representing users stored on the client_schedule database.
+ * Some fields are never referenced so no getter is provided.
+ * 
+ * @author mattjsharp
  */
 public class User {
     
@@ -34,57 +36,40 @@ public class User {
     
     private static User loggedOnUser = null;
     
+    /**
+     * Static method used to retrieve the user logged into the application.
+     * 
+     * @return The user currently logged into the application.
+     */
     public static User getUser() {
         return loggedOnUser;
     }
     
+    /**
+     * Static method used to set the user currently logged into the application.
+     * User is set to null whenever a logout is performed.
+     * 
+     * @param user The user to be logged in.
+     */
     public static void setUser(User user) {
         loggedOnUser = user;
     }
     
+    /**
+     * 
+     * @return The id of the associated user on the client_schedule database.
+     */
     public int getId() {
         return id;
     }
     
+    /**
+     * 
+     * @return The username of the associated user.
+     */
     public String getName() {
         return name;
     }
-    
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-    public String getPassword() {
-        return password;
-    }
-    
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public LocalDateTime getCreationDate() {
-        return creationDate;
-    }
-    
-    public String getCreatedBy() {
-        return createdBy;
-    }
-    
-    public LocalDateTime getLastUpdate() {
-        return lastUpdate;
-    }
-    
-    public void setLastUpdate(LocalDateTime lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
-    
-    public String getLastUpdatedBy() {
-        return lastUpdatedBy;
-    }
-    
-    public void setLastUpdatedBy(String lastUpdatedBy) {
-        this.lastUpdatedBy = lastUpdatedBy;
-    }  
 }
 
 /*
