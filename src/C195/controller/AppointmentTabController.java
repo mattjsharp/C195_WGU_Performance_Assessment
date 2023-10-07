@@ -8,7 +8,6 @@ import java.text.DateFormatSymbols;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,8 +28,12 @@ import javafx.stage.StageStyle;
 import C195.dao.AppointmentDbActions;
 
 /**
- *
- * @author LabUser
+ * FXML Controller class for the appointment dialog.
+ * Populates a table containing appointment records from the client_schedule database.
+ * Contains controls to sort, add, modify, and delete appointments.
+ * Displays an error when no appointment is selected to modify.
+ * 
+ * @author mattjsharp
  */
 public class AppointmentTabController extends Controller implements AppointmentDbActions {
 
@@ -84,6 +87,7 @@ public class AppointmentTabController extends Controller implements AppointmentD
 
     /**
      *  Initializes the controller class.
+     * 
      * 
      * @param url
      * @param rb

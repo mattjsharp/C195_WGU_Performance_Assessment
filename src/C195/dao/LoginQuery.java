@@ -6,11 +6,20 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 /**
- *
- * @author LabUser
+ * Interface containing a method to check if a username and password matches a user record on the client_schedule database.
+ * 
+ * @author mattjsharp
  */
 public interface LoginQuery {
 
+    /**
+     * Method to check if a username and password matches a user record on the client_schedule database.
+     * 
+     * @param username The username provided in the login screen.
+     * @param password The password from the login screen.
+     * @return A user object that matches a User record on the database.
+     * @throws SQLException 
+     */
     default User login(String username, String password) throws SQLException {
         User user = null;
         String sql = "SELECT * FROM users WHERE User_Name = ? AND Password = ?;";

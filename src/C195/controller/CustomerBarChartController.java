@@ -1,6 +1,5 @@
 package C195.controller;
 
-import C195.dao.AppointmentDbActions;
 import C195.dao.CountryDbActions;
 import C195.dao.CustomerDbActions;
 import C195.dao.FirstLevelDivisionDbActions;
@@ -21,9 +20,10 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.ComboBox;
 
 /**
- * FXML Controller class
+ * FXML Controller class for the customer bar chart to be loaded into the report tab.
+ * 
  *
- * @author LabUser
+ * @author mattjsharp
  */
 public class CustomerBarChartController extends Controller implements CountryDbActions, CustomerDbActions, FirstLevelDivisionDbActions {
 
@@ -39,14 +39,17 @@ public class CustomerBarChartController extends Controller implements CountryDbA
     @FXML
     ComboBox countryComboBox;
 
-    private HashMap<String, Integer> countryMap = new HashMap<>();
+    private final HashMap<String, Integer> countryMap = new HashMap<>();
     private HashMap<Integer, String> divisionMap;
 
     private final List<Country> countires = getCountries();
     private List<Customer> customers;
     private List<FirstLevelDivision> divisions;
 
+
+    // Updates the chart based off of the country based off of the country selected in the combo box.
     public void updateChart() {
+        // Clears the current chart.
         chart.getData().clear();
         
         customers = getCustomersByCountry(countryMap.get(countryComboBox.getValue()));
@@ -54,6 +57,7 @@ public class CustomerBarChartController extends Controller implements CountryDbA
         divisionMap = new HashMap<>();
         LinkedList<ArrayList<Customer>> sortedCustomerList = new LinkedList<>();
 
+        // Sorts every every customer from each country into its asssociated division.
         for (FirstLevelDivision division : divisions) {
             divisionMap.put(division.getId(), division.getName());
             ArrayList<Customer> customerList = new ArrayList<>();
@@ -67,6 +71,7 @@ public class CustomerBarChartController extends Controller implements CountryDbA
             }
         }
 
+        // Created new bars to populate the chart.
         for (ArrayList<Customer> list : sortedCustomerList) {
             XYChart.Series<String, Integer> series = new XYChart.Series<>();
             series.setName(divisionMap.get(list.get(0).getDivisionId()) + " (" + list.size() + ")");
@@ -76,7 +81,9 @@ public class CustomerBarChartController extends Controller implements CountryDbA
     }
 
     /**
-     * Initializes the controller class
+     * Initializes the controller class.
+     * Populates the country combo box then updates the chart based off the the input.
+     * 
      * @param url.
      * @param rb
      */

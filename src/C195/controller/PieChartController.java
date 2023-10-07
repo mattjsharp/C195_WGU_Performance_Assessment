@@ -2,7 +2,6 @@ package C195.controller;
 
 import C195.dao.AppointmentDbActions;
 import C195.helper.PieChartSection;
-import C195.model.Appointment;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Side;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -20,7 +18,7 @@ import javafx.scene.control.Label;
 /**
  * FXML Controller class
  *
- * @author LabUser
+ * @author mattjsharp
  */
 public class PieChartController extends Controller implements AppointmentDbActions {
 

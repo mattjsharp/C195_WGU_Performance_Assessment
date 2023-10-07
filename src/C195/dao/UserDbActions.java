@@ -7,10 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author LabUser
+ * Interface containing a method to retrieve user records from the database.
+ * 
+ * @author mattjsharp
  */
 public interface UserDbActions {
+    
+    /**
+     *
+     * @return A list containing all user records from the database.
+     */
     default List<User> getUsers() {
         List<User> users = new ArrayList<>();
         String sql = "SELECT * FROM users";
