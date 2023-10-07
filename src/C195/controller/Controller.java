@@ -5,12 +5,18 @@ import javafx.fxml.Initializable;
 import javafx.stage.Stage;
 
 /**
- *
- * @author LabUser
+ * Base class for FXML controller classes.
+ * Contains a resource bundle and a method set the stage.
+ * 
+ * @author mattjsharp
  */
 public abstract class Controller implements L10n, Initializable {
     protected Stage stage;
     
+    /**
+     *
+     * @param stage The stage to be set.
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }

@@ -47,7 +47,10 @@ public class CustomerBarChartController extends Controller implements CountryDbA
     private List<FirstLevelDivision> divisions;
 
 
-    // Updates the chart based off of the country based off of the country selected in the combo box.
+    /**
+     * Updates the chart based off of the country based off of the country selected in the combo box.
+     */ 
+    
     public void updateChart() {
         // Clears the current chart.
         chart.getData().clear();

@@ -9,9 +9,9 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
 
 /**
- * FXML Controller class
+ * FXML Controller class for the customer bar chart.
  *
- * @author LabUser
+ * @author mattjsharp
  */
 public class ReportTabController extends Controller {
     

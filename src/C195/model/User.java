@@ -18,6 +18,17 @@ public class User {
     private LocalDateTime lastUpdate;
     private String lastUpdatedBy;
     
+    /**
+     * Constructor method for creating User Objects.
+     * 
+     * @param id
+     * @param name
+     * @param password
+     * @param creationDate
+     * @param createdBy
+     * @param lastUpdate
+     * @param lastUpdatedBy 
+     */
     public User(int id,
         String name,
         String password,

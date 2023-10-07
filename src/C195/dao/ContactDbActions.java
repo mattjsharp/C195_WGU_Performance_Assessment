@@ -1,18 +1,23 @@
 package C195.dao;
 
 import C195.model.Contact;
-import C195.model.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author LabUser
+ * An interface for querying contacts from the client_schedule database.
+ * 
+ * @author mattjsharp
  */
 public interface ContactDbActions {
 
+    /**
+     * Queries every contact record from the client_schedule database.
+     * 
+     * @return A list of every contact record represented Contact objects.
+     */
     default List<Contact> getContacts() {
         List<Contact> contacts = new ArrayList<>();
         String sql = "SELECT * FROM contacts";

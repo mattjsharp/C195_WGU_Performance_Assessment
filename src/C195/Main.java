@@ -12,9 +12,18 @@ import javafx.stage.Stage;
  * Main class.
  * Contains the main method which is the entry point of the program.
  * Launches the javaFX GUI application as well as opens and closes the database connection.
- * @author LabUser
+ * 
+ * @author mattjsharp
  */
 public class Main extends Application {
+    /**
+     * The entry point of the program.
+     * Opens and closes the database.
+     * Launches the javafx application.
+     * 
+     * @param args
+     * @throws SQLException 
+     */
     public static void main(String[] args) throws SQLException {
         JDBC.openConnection();
         launch(args);
@@ -24,6 +33,7 @@ public class Main extends Application {
     /**
      * Initializes the JavaFX GUI.
      * Generates a scene graph from an FXML file to populate a scene which is loaded to the stage.
+     * 
      * @param stage
      * @throws Exception
      */

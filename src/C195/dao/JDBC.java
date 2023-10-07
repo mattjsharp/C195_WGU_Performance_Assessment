@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
- *
+ * Opens the database connection.
+ * Abstract class containing static methods to open and close the database connection.
+ * 
  * @author mattjsharp
  */
 public abstract class JDBC {
@@ -19,6 +21,9 @@ public abstract class JDBC {
     private static String password = "Passw0rd!"; // Password
     public static Connection connection;  // Connection Interface
 
+    /**
+     * Creates the database connection.
+     */
     public static void openConnection()
     {
         try {
@@ -32,6 +37,9 @@ public abstract class JDBC {
         }
     }
 
+    /**
+     * Closes the database connection.
+     */
     public static void closeConnection() {
         try {
             connection.close();

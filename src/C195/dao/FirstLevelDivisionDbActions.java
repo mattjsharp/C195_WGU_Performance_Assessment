@@ -6,10 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author LabUser
+ * Interface containing default methods to perform actions related to first_level_divisions on the client_schedule database.
+ * 
+ * @author mattjsharp
  */
 public interface FirstLevelDivisionDbActions {
+    /**
+     * Returns a list containing a list of all first level divisions from the database that reference a given country id.
+     * 
+     * @param countryId The country id to check.
+     * @return A list of divisions.
+     */
     default List<FirstLevelDivision> getDivisions(int countryId) {
         List<FirstLevelDivision> divisions = new ArrayList<>();
         String sql = "SELECT * FROM first_level_divisions WHERE Country_ID = " + countryId + ";";
@@ -37,6 +44,12 @@ public interface FirstLevelDivisionDbActions {
         return divisions;
     }
     
+    /**
+     * Returns the country ID associated with the given country ID.
+     * 
+     * @param code The division ID to check.
+     * @return The country ID associated with the associated division.
+     */
     default int getCountryCode(int code) {
         String sql = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = " + code + ";";
         

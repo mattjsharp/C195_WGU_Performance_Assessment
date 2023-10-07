@@ -17,6 +17,17 @@ public class FirstLevelDivision {
     private final String lastUpdatedBy;
     private final int countryId;
     
+    /**
+     * Constructor method for FirstLevelDivision objects.
+     * 
+     * @param id
+     * @param name
+     * @param createDate
+     * @param createdBy
+     * @param lastUpdate
+     * @param lastUpdatedBy
+     * @param countryId 
+     */
     public FirstLevelDivision(int id, String name, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdatedBy, int countryId) {
         this.id  = id;
         this.name = name;
