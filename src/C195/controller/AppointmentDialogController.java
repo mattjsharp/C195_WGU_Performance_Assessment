@@ -58,7 +58,7 @@ public class AppointmentDialogController extends Controller implements ContactDb
     RadioButton startPmRadioButton, endPmRadioButton;
 
     @FXML
-    Label appointmentFlagLabel, editedByLabel, editedByField;
+    Label appointmentFlagLabel, createdByLabel, editedByLabel;
 
     private boolean modified;
     private Appointment appointment;
@@ -74,7 +74,6 @@ public class AppointmentDialogController extends Controller implements ContactDb
      * Performs tedious logical and validation checks to ensure appointments meet the correct criteria. 
      */
     public void submitDialog() {
-        editedByField.setText(User.getUser().getName());
         
         String title = titleField.getText(),
                 description = descriptionField.getText(),
@@ -267,7 +266,8 @@ public class AppointmentDialogController extends Controller implements ContactDb
         startMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59, startMinute));
         endHourSpinner.setValueFactory(new IntegerSpinnerValueFactory(1, 12, endHour));
         endMinuteSpinner.setValueFactory(new IntegerSpinnerValueFactory(0, 59, endMinute));
-        editedByField.setText(appointment.getLastUpdatedBy());
+        createdByLabel.setText("Created By: " + appointment.getCreatedBy());
+        editedByLabel.setText("Last Modified By: " + appointment.getLastUpdatedBy());
 
         customerComboBox.setValue(reverseCustomerMap.get(appointment.getCustomerId()));
         contactComboBox.setValue(reverseContactMap.get(appointment.getContactId()));
@@ -288,7 +288,6 @@ public class AppointmentDialogController extends Controller implements ContactDb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        editedByField.setText(User.getUser().getName());
         
         for (Contact contact : getContacts()) {
             contactMap.put(contact.getName(), contact.getId());

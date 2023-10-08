@@ -32,10 +32,10 @@ public class CustomerDialogController extends Controller implements CountryDbAct
     Button cancelButton, submitButton;
 
     @FXML
-    Label customerFlagLabel, editedByLabel;
+    Label customerFlagLabel, editedByLabel, createdByLabel;
 
     @FXML
-    TextField idField, nameField, addressField, postalCodeField, phoneField, editedByField;
+    TextField idField, nameField, addressField, postalCodeField, phoneField;
 
     @FXML
     ComboBox<String> countryComboBox, divisionComboBox;
@@ -144,8 +144,9 @@ public class CustomerDialogController extends Controller implements CountryDbAct
         nameField.setText(customer.getName());
         addressField.setText(customer.getAddress());
         postalCodeField.setText(customer.getPostalCode());
-        phoneField.setText(customer.getPhone());  
-        editedByField.setText(User.getUser().getName());
+        phoneField.setText(customer.getPhone());
+        createdByLabel.setText("Created By: " + customer.getCreatedBy());
+        editedByLabel.setText("Last Modified By: " + customer.getLastUpdatedBy());
         countryComboBox.setValue(countryMap.get(getCountryCode(customer.getDivisionId())));
         setDivisions();
         divisionComboBox.setValue(divisionMap.get(customer.getDivisionId()));
@@ -170,7 +171,6 @@ public class CustomerDialogController extends Controller implements CountryDbAct
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        editedByField.setText(User.getUser().getName());
         
         for (Country country : getCountries()) {
             countryMap.put(country.getId(), country.getName());

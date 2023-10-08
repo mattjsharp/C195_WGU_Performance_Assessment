@@ -13,7 +13,7 @@ import java.sql.ResultSet;
 public interface LoginQuery {
 
     /**
-     * Method to check if a username and password matches a user record on the client_schedule database.
+     * Checks if a username and password matches a user record on the client_schedule database.
      * 
      * @param username The username provided in the login screen.
      * @param password The password from the login screen.

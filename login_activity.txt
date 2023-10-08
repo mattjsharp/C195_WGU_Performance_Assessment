@@ -220,3 +220,22 @@
 [2023-10-07T19:07:38.149558800] - LOGOUT: "test" logged out successfully
 [2023-10-07T19:51:24.674825100] - LOGIN SUCCESS: "test" logged in successfully
 [2023-10-07T21:56:58.217946500] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:09:23.170670700] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:10:22.569417800] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:22:48.731434] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:23:09.475736700] - LOGOUT: "test" logged out successfully
+[2023-10-07T23:23:13.243198200] - LOGIN SUCCESS: "admin" logged in successfully
+[2023-10-07T23:26:17.874998100] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:27:08.368469800] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:30:06.214006900] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:38:19.376813400] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:41:13.727471300] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:41:23.376943500] - LOGOUT: "test" logged out successfully
+[2023-10-07T23:41:32.533372600] - LOGIN FAIL: credentials not found for "george"
+[2023-10-07T23:41:46.709763800] - LOGIN FAIL: credentials not found for "george"
+[2023-10-07T23:41:52.896873300] - LOGIN SUCCESS: "admin" logged in successfully
+[2023-10-07T23:44:13.261669800] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:46:21.271399200] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:47:21.425047800] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-07T23:55:59.627144400] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-08T00:00:12.471672300] - LOGIN SUCCESS: "test" logged in successfully

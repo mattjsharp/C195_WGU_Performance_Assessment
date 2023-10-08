@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.CustomerDialogController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.CustomerDialogController">
    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="417.0" BorderPane.alignment="CENTER">
         <buttons>
@@ -26,15 +26,25 @@
    <center>
       <VBox alignment="TOP_CENTER" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="73.0" prefWidth="585.0">
+            <VBox alignment="CENTER" prefHeight="99.0" prefWidth="417.0">
                <children>
                   <Label fx:id="customerFlagLabel" text="Add Customer">
                      <font>
                         <Font size="27.0" />
                      </font>
                   </Label>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <VBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label fx:id="createdByLabel" />
+                              <Label fx:id="editedByLabel" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </VBox>
             <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="600.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="117.0" text="ID">
@@ -85,16 +95,6 @@
                   <TextField fx:id="phoneField" prefHeight="25.0" prefWidth="144.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="37.0" prefWidth="200.0">
-               <children>
-                  <Label fx:id="editedByLabel" prefHeight="17.0" prefWidth="117.0" text="Created By">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </Label>
-                  <TextField fx:id="editedByField" disable="true" prefHeight="25.0" prefWidth="144.0" />
-               </children>
-            </HBox>
             <HBox alignment="CENTER_LEFT">
                <children>
                   <VBox alignment="CENTER_LEFT">
@@ -137,4 +137,7 @@
          </padding>
       </VBox>
    </center>
+   <padding>
+      <Insets top="15.0" />
+   </padding>
 </BorderPane>

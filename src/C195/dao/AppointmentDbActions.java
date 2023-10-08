@@ -119,7 +119,7 @@ public interface AppointmentDbActions {
         List<PieChartSection> sections = new ArrayList<>();
         int nextYear = (month == 12 ? year + 1 : year), nextMonth = (month == 12 ? 1 : month + 1);
         String sql = "SELECT COUNT(Appointment_ID) AS appointmentCount, Type FROM appointments WHERE Start >= \'" + year + "-" + month + "-01\' AND Start < \'" + nextYear + "-" + nextMonth + "-01\' GROUP BY Type;";
-        System.out.println(sql);
+        
         try {
             PreparedStatement ps = JDBC.connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();

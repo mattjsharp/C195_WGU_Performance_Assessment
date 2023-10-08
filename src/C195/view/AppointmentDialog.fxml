@@ -16,6 +16,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="467.0" prefWidth="535.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="C195.controller.AppointmentDialogController">
@@ -45,10 +46,14 @@
                   <HBox alignment="CENTER" prefHeight="47.0" prefWidth="626.0" GridPane.columnSpan="3">
                      <children>
                         <Label fx:id="appointmentFlagLabel" text="Add Appointment" />
-                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="editedByLabel" text="Created by: " />
-                              <Label fx:id="editedByField" />
+                              <VBox alignment="CENTER_LEFT">
+                                 <children>
+                                    <Label fx:id="createdByLabel" />
+                                    <Label fx:id="editedByLabel" />
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
                      </children>
