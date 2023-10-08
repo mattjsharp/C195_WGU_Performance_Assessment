@@ -16,7 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 /**
- * FXML Controller class
+ * FXML Controller class for the Appointment pie chart report.
  *
  * @author mattjsharp
  */
@@ -57,6 +57,10 @@ public class PieChartController extends Controller implements AppointmentDbActio
         }
     }
 
+    /**
+     * Updates the Pie chart.
+     * Queries the client_schedule database for appointment entries matching the input provided.
+     */
     public void setChart() {
         pieChartData = FXCollections.observableArrayList();
         List<PieChartSection> appointments = getDistinctAppointments(months.get(pieMonthComboBox.getValue()), (int) pieYearComboBox.getValue());
@@ -82,15 +86,15 @@ public class PieChartController extends Controller implements AppointmentDbActio
 
     /**
      * Initializes the controller class.
+     * Loads options in to the ComboBoxes and sets an initial value.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        for (int i = 1; i <= 12; i++)
-            pieMonthComboBox.getItems().add(reverseMonths.get(i));
+        for (int i = 1; i <= 12; i++) pieMonthComboBox.getItems().add(reverseMonths.get(i));
+        
         int[] range = getYearRange();
-        for (int i = range[1]; i <= range[0]; i++)
-            pieYearComboBox.getItems().add(i);
-        //appointmentPieChart.setLegendSide(Side.LEFT);
+        for (int i = range[1]; i <= range[0]; i++) pieYearComboBox.getItems().add(i);
+        
         pieMonthComboBox.setValue(reverseMonths.get(LocalDateTime.now().getMonthValue()));
         pieYearComboBox.setValue(LocalDateTime.now().getYear());
         setChart();

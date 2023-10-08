@@ -144,7 +144,7 @@ public class Appointment {
      * @return String with the start date and time on a 12 hour clock.
      */
     public String getFormattedStartDate() {
-        return getStartTime() + " " + startDate.getYear();
+        return  quickDateFormatter(startDate) + " " + startDate.getYear();
     }
     
     /**

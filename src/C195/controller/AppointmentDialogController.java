@@ -26,11 +26,15 @@ import C195.dao.AppointmentDbActions;
 import C195.dao.ContactDbActions;
 import C195.dao.CustomerDbActions;
 import C195.dao.UserDbActions;
+import java.util.List;
 
 /**
- * FXML Controller class
+ * FXML Controller class for the Add/Modify Appointment Dialog. Contains fields
+ * which can be used to insert a new appointment record or modify an existing
+ * one. Performs various logical and validation checks to ensure correct user
+ * input.
  *
- * @author LabUser
+ * @author mattjsharp
  */
 public class AppointmentDialogController extends Controller implements ContactDbActions, UserDbActions, CustomerDbActions, AppointmentDbActions {
 
@@ -62,19 +66,19 @@ public class AppointmentDialogController extends Controller implements ContactDb
 
     private boolean modified;
     private Appointment appointment;
-    
+
     private HashMap<String, Integer> customerMap = new HashMap<>();
     private HashMap<String, Integer> contactMap = new HashMap<>();
-    
+
     private HashMap<Integer, String> reverseCustomerMap = new HashMap<>();
     private HashMap<Integer, String> reverseContactMap = new HashMap<>();
 
     /**
-     * Submits the appointment.
-     * Performs tedious logical and validation checks to ensure appointments meet the correct criteria. 
+     * Submits the appointment. Performs tedious logical and validation checks
+     * to ensure appointments meet the correct criteria.
      */
     public void submitDialog() {
-        
+
         String title = titleField.getText(),
                 description = descriptionField.getText(),
                 location = locationField.getText(),
@@ -83,11 +87,11 @@ public class AppointmentDialogController extends Controller implements ContactDb
                 customer = "", contact = "", user = "";
 
         LocalDate startDate = datePicker.getValue();
-        
+
         int startHour = (int) startHourSpinner.getValue(), startMinute = (int) startMinuteSpinner.getValue(),
-            endHour = (int) endHourSpinner.getValue(), endMinute = (int) endMinuteSpinner.getValue(),
-            userId = User.getUser().getId(),
-            contactId = -1, customerId = -1;
+                endHour = (int) endHourSpinner.getValue(), endMinute = (int) endMinuteSpinner.getValue(),
+                userId = User.getUser().getId(),
+                contactId = -1, customerId = -1;
 
         String errorString = "";
         boolean valid = true;
@@ -149,26 +153,26 @@ public class AppointmentDialogController extends Controller implements ContactDb
                 endHour = 0;
             }
         }
-        
+
         // Adjusting time zone to UTC and others to EST
-        LocalDateTime start = 
-                LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)
+        LocalDateTime start
+                = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)
                         .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
-        
-        LocalDateTime end = 
-                LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), endHour, endMinute)
+
+        LocalDateTime end
+                = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), endHour, endMinute)
                         .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
-        
+
         LocalDateTime startEST = start.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
         LocalDateTime endEST = end.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
-        
+
         if (start.isAfter(end)) {
             errorString += "Start time cannot be greater than the end time.\n\n";
             valid = false;
         }
-        
-        if ((startEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || startEST.toLocalTime().isAfter(LocalTime.of(22, 0))) ||
-                (endEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || endEST.toLocalTime().isAfter(LocalTime.of(22, 0)))) {
+
+        if ((startEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || startEST.toLocalTime().isAfter(LocalTime.of(22, 0)))
+                || (endEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || endEST.toLocalTime().isAfter(LocalTime.of(22, 0)))) {
             errorString += "Date cannot be schedlued outside of office hours:\n\t\t8:00am - 10:00pm EST\n\n";
             valid = false;
         }
@@ -222,6 +226,7 @@ public class AppointmentDialogController extends Controller implements ContactDb
 
     /**
      * Populates the form with data from the selected appointment.
+     *
      * @param appointment The selected appointment from the appointment table.
      */
     public void setAppointment(Appointment appointment) {
@@ -241,7 +246,9 @@ public class AppointmentDialogController extends Controller implements ContactDb
         // Formatting the time correctly.
         if (startHour >= 12) {
             startPmRadioButton.setSelected(true);
-            if (startHour != 12) startHour %= 12;
+            if (startHour != 12) {
+                startHour %= 12;
+            }
         } else {
             if (startHour == 0) {
                 startHour = 12;
@@ -250,7 +257,9 @@ public class AppointmentDialogController extends Controller implements ContactDb
 
         if (endHour >= 12) {
             endPmRadioButton.setSelected(true);
-            if (endHour != 12) endHour %= 12;
+            if (endHour != 12) {
+                endHour %= 12;
+            }
         } else {
             if (endHour == 0) {
                 endHour = 12;
@@ -274,7 +283,7 @@ public class AppointmentDialogController extends Controller implements ContactDb
     }
 
     /**
-     * Closes the dialog window. 
+     * Closes the dialog window.
      */
     public void cancelDialog() {
         stage.close();
@@ -288,7 +297,7 @@ public class AppointmentDialogController extends Controller implements ContactDb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         for (Contact contact : getContacts()) {
             contactMap.put(contact.getName(), contact.getId());
             reverseContactMap.put(contact.getId(), contact.getName());
@@ -300,7 +309,7 @@ public class AppointmentDialogController extends Controller implements ContactDb
             reverseCustomerMap.put(customer.getId(), customer.getName());
             customerComboBox.getItems().add(customer.getName());
         }
-        
+
         datePicker.setValue(LocalDate.now());
 
         startHourSpinner.setValueFactory(new IntegerSpinnerValueFactory(1, 12));

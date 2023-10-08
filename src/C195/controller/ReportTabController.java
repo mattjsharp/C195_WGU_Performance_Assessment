@@ -20,6 +20,11 @@ public class ReportTabController extends Controller {
     
     private HBox reportBox = new HBox();
     
+    /**
+     * Updates each report by reloading the FXML document.
+     * 
+     * @throws IOException 
+     */
     private void loadCharts() throws IOException {
         FXMLLoader pieChartLoader = new FXMLLoader(getClass().getResource("../view/PieChart.fxml"));
         FXMLLoader barChartLoader = new FXMLLoader(getClass().getResource("../view/CustomerBarChart.fxml"));
@@ -34,6 +39,7 @@ public class ReportTabController extends Controller {
 
     /**
      * Initializes the controller class.
+     * Calls the loadCharts method for the first time.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {

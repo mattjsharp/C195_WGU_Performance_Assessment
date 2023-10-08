@@ -16,9 +16,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
- * FXML Controller class
+ * FXML Controller class for the Contact bar chart report.
  *
- * @author LabUser
+ * @author mattjsharp
  */
 public class ContactTabeReportController extends Controller implements AppointmentDbActions, ContactDbActions {
 
@@ -46,10 +46,13 @@ public class ContactTabeReportController extends Controller implements Appointme
     
     private HashMap<String, Integer> contactMap = new HashMap<>();
 
+    /**
+     * Updates the barchart based using the input in the Country combo box.
+     */
     public void setCustomer() {
         int id = contactMap.get(contactComboBox.getValue());
         contactIdLabel.setText(String.valueOf(id));
-        appointments = getAppointmentsByCustomer(id);
+        appointments = getAppointmentsByContact(id);
         
         appointmentTable.getItems().clear();
         appointmentTable.getItems().addAll(appointments);
@@ -57,6 +60,8 @@ public class ContactTabeReportController extends Controller implements Appointme
 
     /**
      * Initializes the controller class.
+     * Populates the Country ComboBox with countries to be used later.
+     * 
      * @param url
      * @param rb
      */

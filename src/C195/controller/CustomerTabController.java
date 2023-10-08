@@ -92,6 +92,7 @@ public class CustomerTabController extends Controller implements CustomerDbActio
             } else {
                 if (SimpleAlert.simpleConfirm("Confirmation", "Are you sure you want to delete this customer?")) {
                     deleteCustomer(selectedCustomer.getId());
+                    SimpleAlert.simpleInformation("Delete Success", selectedCustomer.getName() + " (" + selectedCustomer.getId() + ") deleted successfully.");
                     updateTable();
                 } else {
                     SimpleAlert.simpleError("SQL Error", "Somthing went wrong with the database.");

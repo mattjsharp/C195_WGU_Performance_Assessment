@@ -14,7 +14,9 @@ public abstract class Controller implements L10n, Initializable {
     protected Stage stage;
     
     /**
-     *
+     * Can be used to set the current stage.
+     * Useful for dialogues.
+     * 
      * @param stage The stage to be set.
      */
     public void setStage(Stage stage) {

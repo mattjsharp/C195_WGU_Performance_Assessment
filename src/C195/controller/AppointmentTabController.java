@@ -268,7 +268,7 @@ public class AppointmentTabController extends Controller implements AppointmentD
             if (SimpleAlert.simpleConfirm("Confirmation", "Are you sure you want to delete this appointment?")) {
                 if (deleteAppointment(selectedAppointment.getId())) {
                     updateTable();
-                    SimpleAlert.simpleInformation("Delete Success", "ID: " + selectedAppointment.getId() + " TYPE: " + selectedAppointment.getType() + " deleted successfully.");
+                    SimpleAlert.simpleInformation("Delete Success", "ID: " + selectedAppointment.getId() + "\nTYPE: " + selectedAppointment.getType() + "\nAppointment deleted successfully.");
                 } else {
                     SimpleAlert.simpleError("SQL Error", "Somthing went wrong with the database.");
                 }

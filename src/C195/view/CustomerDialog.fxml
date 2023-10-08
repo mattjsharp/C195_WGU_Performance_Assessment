@@ -30,7 +30,7 @@
                <children>
                   <Label fx:id="customerFlagLabel" text="Add Customer">
                      <font>
-                        <Font size="27.0" />
+                        <Font name="System Bold" size="27.0" />
                      </font>
                   </Label>
                   <HBox alignment="CENTER">

@@ -70,6 +70,52 @@ public interface AppointmentDbActions {
      */
     default List<Appointment> getAppointmentsByCustomer(int id) {
         List<Appointment> appointments = new ArrayList<>();
+        String sql = "SELECT * FROM appointments WHERE Customer_ID = " + id + ";";
+
+        try {
+            PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
+                LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
+                LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();
+                LocalDateTime lastUpdate = rs.getTimestamp("Last_Update").toLocalDateTime();
+
+                appointments.add(new Appointment(
+                        rs.getInt("Appointment_ID"),
+                        rs.getString("Title"),
+                        rs.getString("Description"),
+                        rs.getString("Location"),
+                        rs.getString("Type"),
+                        start,
+                        end,
+                        createDate,
+                        rs.getString("Created_By"),
+                        lastUpdate,
+                        rs.getString("Last_Updated_By"),
+                        rs.getInt("Customer_ID"),
+                        rs.getInt("User_ID"),
+                        rs.getInt("Contact_ID")
+                )
+                );
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return appointments;
+    }
+    
+    /**
+     * Queries the database to find appointment records that reference a certain Contact_ID.
+     * 
+     * @param id The ID of a particular contact.
+     * @return A list of Appointment objects containing the same contact ID.
+     */
+    default List<Appointment> getAppointmentsByContact(int id) {
+        List<Appointment> appointments = new ArrayList<>();
         String sql = "SELECT * FROM appointments WHERE Contact_ID = " + id + ";";
 
         try {

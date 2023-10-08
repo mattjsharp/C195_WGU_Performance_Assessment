@@ -43,9 +43,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <HBox alignment="CENTER" prefHeight="47.0" prefWidth="626.0" GridPane.columnSpan="3">
+                  <HBox alignment="CENTER" prefHeight="53.0" prefWidth="482.0" GridPane.columnSpan="3">
                      <children>
-                        <Label fx:id="appointmentFlagLabel" text="Add Appointment" />
+                        <Label fx:id="appointmentFlagLabel" text="Add Appointment">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font></Label>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <VBox alignment="CENTER_LEFT">

@@ -137,7 +137,7 @@ public class MainController extends Controller implements AppointmentDbActions {
         for (Appointment appointment : appointments) {
             int minutesDifference = (int) ChronoUnit.MINUTES.between(LocalDateTime.now(), appointment.getStartDate());
             if (minutesDifference <= 15 && minutesDifference > 0) {
-                appointmentDescription += "ID: " + appointment.getId() + "\tSTART: " + appointment.getStartTime() + " " + appointment.getFormattedStartDate() + "\tTITLE: " + appointment.getTitle() + "\n\n";
+                appointmentDescription += "ID:\t\t" + appointment.getId() + "\nSTART:\t" + appointment.getStartTime() + ", " + appointment.getFormattedStartDate() + "\nEND:\t\t" + appointment.getEndTime() + "\nTITLE:\t" + appointment.getTitle() + "\n---------------------------------\n";
                 appointmentCount++;
             }
         }

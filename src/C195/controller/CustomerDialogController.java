@@ -24,7 +24,7 @@ import C195.dao.FirstLevelDivisionDbActions;
 /**
  * FXML Controller class
  *
- * @author LabUser
+ * @author mattjsharp
  */
 public class CustomerDialogController extends Controller implements CountryDbActions, FirstLevelDivisionDbActions, CustomerDbActions {
 
@@ -133,6 +133,11 @@ public class CustomerDialogController extends Controller implements CountryDbAct
          
     }
 
+    /**
+     * Populates the form with data from the selected customer.
+     * 
+     * @param customer The selected appointment from the appointment table.
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
         
@@ -152,6 +157,9 @@ public class CustomerDialogController extends Controller implements CountryDbAct
         divisionComboBox.setValue(divisionMap.get(customer.getDivisionId()));
     }
 
+    /**
+     * Populates the first level division box with divisions referencing the country in the Country ComboBox
+     */
     public void setDivisions() {
         divisionComboBox.getItems().clear();
         List<FirstLevelDivision> divisions = getDivisions(reverseCountryMap.get(countryComboBox.getValue()));
@@ -165,6 +173,7 @@ public class CustomerDialogController extends Controller implements CountryDbAct
 
     /**
      * Initializes the controller class.
+     * Populates the Country ComboBox and the HashMaps used for quick association of name to ID and the inverse.
      *
      * @param url
      * @param rb
