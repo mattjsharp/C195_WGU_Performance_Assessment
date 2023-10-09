@@ -63,21 +63,26 @@ public interface AppointmentDbActions {
     }
 
     /**
-     * Queries the database to find appointment records that reference a certain Country_ID.
+     * Counts the records in a database that have date ranges that overlap with a provided one.
      * 
-     * @param id The ID of a particular customer.
-     * @return A list of Appointment objects containing the same customer ID.
+     * @return A list of Appointment objects that overlap with the date range.
      */
-    default List<Appointment> getAppointmentsByCustomer(int id) {
+    default List<Appointment> customerOverlapCheck(String startDate, String endDate, int customerId, int appointmentId) {
         List<Appointment> appointments = new ArrayList<>();
-        String sql = "SELECT * FROM appointments WHERE Customer_ID = " + id + ";";
+        String sql = "SELECT * FROM appointments WHERE Customer_ID = ? AND (? < end AND start < ?) AND Appointment_ID != ?;";
+        // start1.isBefore(end2) && start2.isBefore(end1);
 
         try {
             PreparedStatement ps = JDBC.connection.prepareStatement(sql);
+            ps.setInt(1, customerId);
+            ps.setString(2, startDate);
+            ps.setString(3,endDate);
+            ps.setInt(4, appointmentId);
+            
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-
+                
                 LocalDateTime start = rs.getTimestamp("Start").toLocalDateTime();
                 LocalDateTime end = rs.getTimestamp("End").toLocalDateTime();
                 LocalDateTime createDate = rs.getTimestamp("Create_Date").toLocalDateTime();

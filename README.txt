@@ -1,8 +1,28 @@
-<h1>C195 Appointment Scheduler</h1>
-<h3>QAM2 TASK 1: JAVA APPLICATION DEVELOPMENT</h3>
+WGU Software II/C195 Performance Assessment
 
-•  title and purpose of the application
+----------------------------------------------------------------------------------
 
+Title:
+    Appointment Scheduler
+
+----------------------------------------------------------------------------------
+
+Purpose:
+    A GUI based application to provide scheduling capabilites to a company with offices
+    in several locations.
+
+----------------------------------------------------------------------------------
+
+
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
+
+----------------------------------------------------------------------------------
 •  author, contact information, student application version, and date
 
 •  IDE including version number (e.g., IntelliJ Community 2020.01), full JDK of version used (e.g., Java SE 17.0.1), and JavaFX version compatible with JDK version (e.g. JavaFX-SDK-17.0.1)

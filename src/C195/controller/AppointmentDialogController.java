@@ -88,6 +88,9 @@ public class AppointmentDialogController extends Controller implements ContactDb
 
         LocalDate startDate = datePicker.getValue();
 
+        LocalDateTime start;
+        LocalDateTime end;
+
         int startHour = (int) startHourSpinner.getValue(), startMinute = (int) startMinuteSpinner.getValue(),
                 endHour = (int) endHourSpinner.getValue(), endMinute = (int) endMinuteSpinner.getValue(),
                 userId = User.getUser().getId(),
@@ -155,13 +158,8 @@ public class AppointmentDialogController extends Controller implements ContactDb
         }
 
         // Adjusting time zone to UTC and others to EST
-        LocalDateTime start
-                = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute)
-                        .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
-
-        LocalDateTime end
-                = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), endHour, endMinute)
-                        .atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+        start = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), startHour, startMinute).atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
+        end = LocalDateTime.of(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth(), endHour, endMinute).atZone(ZoneId.systemDefault()).withZoneSameInstant(ZoneId.of("UTC")).toLocalDateTime();
 
         LocalDateTime startEST = start.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
         LocalDateTime endEST = end.atZone(ZoneId.of("UTC")).withZoneSameInstant(ZoneId.of("America/New_York")).toLocalDateTime();
@@ -175,6 +173,18 @@ public class AppointmentDialogController extends Controller implements ContactDb
                 || (endEST.toLocalTime().isBefore(LocalTime.of(8, 0)) || endEST.toLocalTime().isAfter(LocalTime.of(22, 0)))) {
             errorString += "Date cannot be schedlued outside of office hours:\n\t\t8:00am - 10:00pm EST\n\n";
             valid = false;
+        }
+
+        // Checking for appointment conflicts with a particular customer.
+        if (valid) {
+            List<Appointment> appointmentOverlaps = customerOverlapCheck(SQLDateFormatter.formatDate(start), SQLDateFormatter.formatDate(end), customerId, appointment != null ? appointment.getId() : 0);
+            if (!appointmentOverlaps.isEmpty()) {
+                errorString += "Customer has " + appointmentOverlaps.size() + " conflicting appointments:\n\n";
+                valid = false;
+                for (Appointment appointment : appointmentOverlaps) {
+                    errorString += "\tID: " + appointment.getId() + "\tTitle: " + appointment.getTitle() + "\n";
+                }
+            }
         }
 
         // Final result
@@ -290,7 +300,8 @@ public class AppointmentDialogController extends Controller implements ContactDb
     }
 
     /**
-     * Initializes the controller class.
+     * Initializes the controller class. Populates both the customer and contact
+     * ComboBoxes. Sets the date picker to the current date.
      *
      * @param url
      * @param rb
