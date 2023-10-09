@@ -88,7 +88,7 @@ public class CustomerTabController extends Controller implements CustomerDbActio
         } else {
             int obligations = customerInAppointment(selectedCustomer);
             if (obligations > 0) {
-                SimpleAlert.simpleWarning("Scheduling Error", "Customer cannot be deleted\n\nCustomer still has : " + obligations + " appointment(s) scheduled.");
+                SimpleAlert.simpleWarning("Scheduling Error", "Customer cannot be deleted\n\nCustomer still has " + obligations + " appointment(s) scheduled.");
             } else {
                 if (SimpleAlert.simpleConfirm("Confirmation", "Are you sure you want to delete this customer?")) {
                     deleteCustomer(selectedCustomer.getId());

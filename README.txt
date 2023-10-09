@@ -1,34 +1,28 @@
-WGU Software II/C195 Performance Assessment
 
-----------------------------------------------------------------------------------
+                    WGU C195 Performance Assessment
+                    
+    Author: Matthew Sharp / mattjsharp 
+    ID: 008211210
+    Last Revised: 10/09/2023
 
-Title:
-    Appointment Scheduler
+    Java: 17.0.1 2021-10-19 LTS
+    MySQL Connector: 8.0.25
+    IDE: Apache NetBeans IDE 12.6
+    JavaFX: openJFX 11.0.2
+    SceneBuilder: 17.0.0
 
-----------------------------------------------------------------------------------
+--PURPOSE-----------------------------------------------------------------------
 
-Purpose:
-    A GUI based application to provide scheduling capabilites to a company with offices
-    in several locations.
+    Create a GUI-based desktop application for a global consulting organization
+    to provide Appointment scheduling and customer management utilities as well
+    as provide some basic data analytic reports. A pre-existing MySQL database
+    was provided for use. The application provides support for both english and
+    french languages, adjusts times to support any timezone the user may be 
+    located in, and conforms to and abides to all requirements outlined in the
+    QAM2 TASK 1: JAVA APPLICATION DEVELOPMENT Rubric.
 
-----------------------------------------------------------------------------------
-
-
-----------------------------------------------------------------------------------
-
-----------------------------------------------------------------------------------
-
-----------------------------------------------------------------------------------
-
-----------------------------------------------------------------------------------
-
-----------------------------------------------------------------------------------
-•  author, contact information, student application version, and date
-
-•  IDE including version number (e.g., IntelliJ Community 2020.01), full JDK of version used (e.g., Java SE 17.0.1), and JavaFX version compatible with JDK version (e.g. JavaFX-SDK-17.0.1)
+--Directions--------------------------------------------------------------------
 
 •  directions for how to run the program
 
 •  a description of the additional report of your choice you ran in part A3f
-
-•  the MySQL Connector driver version number, including the update number (e.g., mysql-connector-java-8.1.23)

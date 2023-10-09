@@ -320,3 +320,13 @@
 [2023-10-09T03:23:32.315251300] - LOGIN SUCCESS: "test" logged in successfully
 [2023-10-09T03:34:57.198899800] - LOGIN SUCCESS: "test" logged in successfully
 [2023-10-09T03:36:18.235478] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-09T16:33:30.860964600] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-09T16:44:10.791912300] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-09T16:51:57.295205600] - LOGIN SUCCESS: "admin" logged in successfully
+[2023-10-09T17:17:20.891325300] - LOGIN FAIL: empty username and/or passord field(s)
+[2023-10-09T17:17:20.957516700] - LOGIN FAIL: credentials not found for ""
+[2023-10-09T17:17:28.618451300] - LOGIN FAIL: credentials not found for "test"
+[2023-10-09T17:17:33.458948600] - LOGIN SUCCESS: "test" logged in successfully
+[2023-10-09T17:21:29.155938500] - LOGIN FAIL: empty username and/or passord field(s)
+[2023-10-09T17:21:29.217571100] - LOGIN FAIL: credentials not found for ""
+[2023-10-09T17:21:45.774771100] - LOGIN SUCCESS: "test" logged in successfully

@@ -46,6 +46,8 @@ public class MainController extends Controller implements AppointmentDbActions {
 
     /**
      * Initializes the controller class.
+     * Loads data into the tabs and update them each time a tab is changed.
+     * Allows users to logout or exit.
      *
      * @param url
      * @param rb
@@ -64,6 +66,8 @@ public class MainController extends Controller implements AppointmentDbActions {
         loggedInAsLabel.setText(l10n.getString("loggedInAs"));
         userNameLabel.setText(User.getUser().getName());
 
+        // Using a lambda expresson to implement ChangeListener functional interface to an Observable.
+        // Calls the setTab method whenever a tab is changed.
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
             try {
                 setTab();

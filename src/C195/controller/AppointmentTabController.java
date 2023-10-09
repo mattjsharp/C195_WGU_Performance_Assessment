@@ -120,7 +120,8 @@ public class AppointmentTabController extends Controller implements AppointmentD
         appointmentCustomerIdColumn.setText(l10n.getString("customerId"));
         appointmentUserIdColumn.setText(l10n.getString("userId"));
 
-        // Adding and event listener to the group of radio buttons.
+        // Using a lambda expresson to implement ChangeListener functional interface to an Observable.
+        // Used to update the table with different circumstances depending on which option is selected.
         appointmentSort.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
             if (newVal != null) {
                 RadioButton selectedRadioButton = (RadioButton) newVal;
@@ -146,6 +147,7 @@ public class AppointmentTabController extends Controller implements AppointmentD
      * Updates the appointment table.
      * Queries the appointment table from the client_schedule database and stores each record a list.
      * Clears the current table replaces the records with the new List.
+     * 
      * @param flag an optional flag used to filer the list.
      */
     private void updateTable(char... flag) {
